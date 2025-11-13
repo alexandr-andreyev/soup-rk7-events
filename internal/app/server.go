@@ -1,6 +1,8 @@
 package app
 
 import (
+	"net/http"
+
 	"golang.org/x/sys/windows/svc/debug"
 )
 
@@ -9,4 +11,5 @@ type server struct {
 	// a local logger
 	// a database connection
 	// your app configuration
+	httpServer *http.Server
 }

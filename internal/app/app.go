@@ -1,22 +1,19 @@
 package app
 
-import "time"
+import (
+	"log"
+	"net/http"
+)
 
 // The wrapper of your app
 func runApp(s server) {
-
-	s.winlog.Info(1, "In app.yourApp") //TODO исправить логи
-
 	// This is just some sample code to do something
-	time.Sleep(1 * time.Second)
-	s.winlog.Info(1, "Still running")
-
-	time.Sleep(2 * time.Second)
-	s.winlog.Info(1, "And running")
-
-	time.Sleep(3 * time.Second)
-	s.winlog.Info(1, "But the service will keep running")
 
 	// Notice that if this exits, the service continues to run
 	// You can launch web servers, etc.
+	log.Println("Starting HTTP server on :7080")
+
+	if err := s.httpServer.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+		log.Fatalf("HTTP server error: %v", err)
+	}
 }

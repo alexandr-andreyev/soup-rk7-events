@@ -1,4 +1,4 @@
-# GO Windows Service Shell
+# Soup RK7 Events - Windows Service
 
 This is based on the [GO Windows service example program](https://godoc.org/golang.org/x/sys/windows/svc/example) provided by the GO Project. 
 It is a project shell to create a Windows service.

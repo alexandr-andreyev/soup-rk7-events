@@ -2,7 +2,10 @@ package app
 
 import (
 	"fmt"
+	"net/http"
+	"time"
 
+	"github.com/alexandr-andreyev/soup-rk7-events/internal/transport"
 	"golang.org/x/sys/windows/svc/debug"
 )
 
@@ -27,6 +30,22 @@ func setup(wl debug.Log, svcName, sha1ver string) (server, error) {
 
 	// read configuration
 	// configure more logging
-
+	s.httpServer = setupHttpServer()
 	return s, nil
+}
+
+func setupHttpServer() *http.Server {
+	handler := transport.NewHandler()
+
+	mux := http.NewServeMux()
+	mux.HandleFunc("/events", handler.HandleEvents)
+
+	s := &http.Server{
+		Addr:         ":7080", // порт, куда будет постить внешняя система
+		Handler:      mux,
+		ReadTimeout:  10 * time.Second,
+		WriteTimeout: 10 * time.Second,
+	}
+
+	return s
 }
