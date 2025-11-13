@@ -1,10 +1,12 @@
 package transport
 
 import (
-	"fmt"
+	"encoding/xml"
 	"io"
 	"log"
 	"net/http"
+
+	"github.com/alexandr-andreyev/soup-rk7-events/internal/models"
 )
 
 type Handler struct {
@@ -25,10 +27,17 @@ func (h *Handler) HandleEvents(w http.ResponseWriter, r *http.Request) {
 	}
 	defer r.Body.Close()
 
-	// Выводим содержимое тела запроса в консоль (или лог)
-	fmt.Println("Event body:", string(body))
+	var rk7NotifyEvent models.Rk7NotifyEvent
+	err = xml.Unmarshal(body, &rk7NotifyEvent)
+	if err != nil {
+		http.Error(w, "Failed to parse XML", http.StatusBadRequest)
+		return
+	}
+
+	log.Println("Parsed Event:", rk7NotifyEvent)
+	log.Println("Event Name:", rk7NotifyEvent.Name)
+	log.Println("Event RestCode:", rk7NotifyEvent.RestCode)
 
 	// Можно добавить лог в файл позже
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Event received"))
 }
