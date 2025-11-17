@@ -7,13 +7,17 @@ import (
 	"net/http"
 
 	"github.com/alexandr-andreyev/soup-rk7-events/internal/models"
+	"github.com/alexandr-andreyev/soup-rk7-events/internal/services"
 )
 
 type Handler struct {
+	NotifyService services.NotifyEventService
 }
 
-func NewHandler() *Handler {
-	return &Handler{}
+func NewHandler(notifySvc services.NotifyEventService) *Handler {
+	return &Handler{
+		NotifyService: notifySvc,
+	}
 }
 
 func (h *Handler) HandleEvents(w http.ResponseWriter, r *http.Request) {
@@ -27,6 +31,8 @@ func (h *Handler) HandleEvents(w http.ResponseWriter, r *http.Request) {
 	}
 	defer r.Body.Close()
 
+	log.Println("Request Body:", string(body))
+
 	var rk7NotifyEvent models.Rk7NotifyEvent
 	err = xml.Unmarshal(body, &rk7NotifyEvent)
 	if err != nil {
@@ -34,10 +40,11 @@ func (h *Handler) HandleEvents(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	log.Println("Parsed Event:", rk7NotifyEvent)
-	log.Println("Event Name:", rk7NotifyEvent.Name)
-	log.Println("Event RestCode:", rk7NotifyEvent.RestCode)
-
+	err = h.NotifyService.HandleNotification(&rk7NotifyEvent)
+	if err != nil {
+		http.Error(w, "Failed to handle notification", http.StatusInternalServerError)
+		return
+	}
 	// Можно добавить лог в файл позже
 	w.WriteHeader(http.StatusOK)
 }

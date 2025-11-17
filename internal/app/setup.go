@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/alexandr-andreyev/soup-rk7-events/internal/services"
 	"github.com/alexandr-andreyev/soup-rk7-events/internal/transport"
 	"golang.org/x/sys/windows/svc/debug"
 )
@@ -30,12 +31,13 @@ func setup(wl debug.Log, svcName, sha1ver string) (server, error) {
 
 	// read configuration
 	// configure more logging
-	s.httpServer = setupHttpServer()
+	handleEventService := services.NewRkNotifyHandleService()
+	s.httpServer = setupHttpServer(handleEventService)
 	return s, nil
 }
 
-func setupHttpServer() *http.Server {
-	handler := transport.NewHandler()
+func setupHttpServer(handleEventService services.NotifyEventService) *http.Server {
+	handler := transport.NewHandler(handleEventService)
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/events", handler.HandleEvents)
