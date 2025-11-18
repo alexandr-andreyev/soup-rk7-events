@@ -18,7 +18,12 @@ func NewRkNotifyHandleService() *RkNotifyHandleService {
 
 func (s *RkNotifyHandleService) HandleNotification(data *models.Rk7NotifyEvent) error {
 	// Здесь будет логика обработки уведомления
-	log.Println("Handling notification for event:", data.Name)
-	log.Println("RestCode:", data.RestCode)
+	switch data.Name {
+	case "Started":
+		log.Println("event Name:", data.Name)
+		log.Println("RestCode:", data.RestCode)
+	default:
+		log.Println("Unhandled event:", data.Name)
+	}
 	return nil
 }

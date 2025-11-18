@@ -15,4 +15,7 @@ test:
 
 # The sha1 stuff isn't working as of now
 buildEXE:
-	go build -o "$(TARGETDIR)\gosvc.exe" -a -ldflags "-X main.sha1ver=$(sha1ver)" .\cmd\gosvc  
+	go build -o ".\souprk7notify.exe" -a -ldflags "-X main.sha1ver=$(sha1ver)" .\cmd\app
+
+run:
+	go run .\cmd\app debug
