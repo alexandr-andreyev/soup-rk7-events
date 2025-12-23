@@ -2,7 +2,7 @@ TARGETDIR=./deploy
 proj=github.com/alexandr-andreyev/soup-rk7-events
 
 # Get git commit hash (use 'unknown' if git command fails on Windows)
-sha1ver := $(shell git rev-parse HEAD 2>nul || echo unknown)
+sha1ver := $(shell git rev-parse HEAD || echo unknown)
 
 all: vet test buildEXE
 

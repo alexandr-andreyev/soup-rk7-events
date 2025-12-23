@@ -1,0 +1,21 @@
+# Configuration for soup-rk7-events service
+
+server:
+  # Port to listen on for incoming RK7 events
+  port: ":7080"
+  # HTTP server timeouts in seconds
+  read_timeout: 10
+  write_timeout: 10
+
+external:
+  # External API URL to forward events to
+  url: "https://my.local/events"
+
+  # HTTP client timeout in seconds
+  timeout_seconds: 10
+
+  # Number of retry attempts on failure
+  max_retries: 3
+
+  # Delay between retries in seconds
+  retry_delay_seconds: 1
