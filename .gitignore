@@ -24,3 +24,5 @@ _testmain.go
 *.prof
 .vs
 /deploy 
+orders.db
+nul

@@ -31,7 +31,7 @@ func (h *Handler) HandleEvents(w http.ResponseWriter, r *http.Request) {
 	}
 	defer r.Body.Close()
 
-	log.Println("Request Body:", string(body))
+	//log.Println("Request Body:", string(body))
 
 	var rk7NotifyEvent models.Rk7NotifyEvent
 	err = xml.Unmarshal(body, &rk7NotifyEvent)
@@ -40,11 +40,11 @@ func (h *Handler) HandleEvents(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = h.NotifyService.HandleNotification(&rk7NotifyEvent)
-	if err != nil {
-		http.Error(w, "Failed to handle notification", http.StatusInternalServerError)
-		return
-	}
-	// Можно добавить лог в файл позже
+	// Отправляем OK сразу после успешного парсинга
 	w.WriteHeader(http.StatusOK)
+
+	// Обрабатываем уведомление синхронно для сохранения порядка событий
+	if err := h.NotifyService.HandleNotification(&rk7NotifyEvent); err != nil {
+		log.Printf("Error handling notification: %v", err)
+	}
 }
