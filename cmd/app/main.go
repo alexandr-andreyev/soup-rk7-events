@@ -23,7 +23,7 @@ var sha1ver string
 
 func svcLauncher() error {
 
-	err := app.Run(elog, svcName, sha1ver)
+	err := app.Run(svcName, sha1ver)
 	if err != nil {
 		return errors.Wrap(err, "app.run")
 	}

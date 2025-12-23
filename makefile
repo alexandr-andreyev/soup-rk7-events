@@ -1,21 +1,20 @@
-TARGETDIR=.\deploy
-proj=github.com\billgraziano\go-windows-svc
-sha1ver := $(shell git rev-parse HEAD)
-test := $(shell date /t)
+TARGETDIR=./deploy
+proj=github.com/alexandr-andreyev/soup-rk7-events
 
+# Get git commit hash (use 'unknown' if git command fails on Windows)
+sha1ver := $(shell git rev-parse HEAD 2>nul || echo unknown)
 
-all: vet test  buildEXE
+all: vet test buildEXE
 
 vet:
-	go vet -all -shadow .\cmd\gosvc
-	go vet -all -shadow .\app
+	go vet ./cmd/app
+	go vet ./internal/...
 
-test: 
-	go.exe test -timeout 30s $(proj)\app
+test:
+	go test -timeout 30s ./internal/...
 
-# The sha1 stuff isn't working as of now
 buildEXE:
-	go build -o ".\souprk7notify.exe" -a -ldflags "-X main.sha1ver=$(sha1ver)" .\cmd\app
+	go build -o "./souprk7notify.exe" -a -ldflags "-X main.sha1ver=$(sha1ver)" ./cmd/app
 
 run:
-	go run .\cmd\app debug
+	go run ./cmd/app debug
