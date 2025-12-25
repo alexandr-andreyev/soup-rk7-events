@@ -19,3 +19,11 @@ external:
 
   # Delay between retries in seconds
   retry_delay_seconds: 1
+
+database:
+  # SQLite database file path for order state tracking
+  path: "orders.db"
+
+logging:
+  # Directory for log files
+  directory: "logs"

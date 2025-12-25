@@ -1,7 +1,7 @@
 package services
 
 import (
-	"log"
+	"log/slog"
 
 	"github.com/alexandr-andreyev/soup-rk7-events/internal/client"
 	"github.com/alexandr-andreyev/soup-rk7-events/internal/database"
@@ -27,42 +27,40 @@ func NewRkNotifyHandleService(externalClient *client.ExternalClient, orderRepo *
 
 func (s *RkNotifyHandleService) HandleNotification(data *models.Rk7NotifyEvent) error {
 	// Log received event
-	log.Printf("Received event: %s (GUID: %s)", data.Name, data.GUID)
+	slog.Info("Received event", "name", data.Name, "guid", data.GUID)
 
 	// Process event based on type
 	switch data.Name {
 	case "Started":
-		log.Println("event Name:", data.Name)
-		log.Println("RestCode:", data.RestCode)
+		slog.Info("Started event", "restCode", data.RestCode)
 		// Don't forward system events
 		return nil
 
 	case "New Order":
-		log.Println("event Name:", data.Name)
-		log.Printf("Data: %+v\n", data)
+		slog.Info("New Order event", "data", data)
 		// Forward to external API
 		// return s.sendToExternalAPI(data)
 
 	case "Order Changed":
 		if data.Order == nil {
-			log.Println("Ignoring Order Changed event with no Order data")
+			slog.Info("Ignoring Order Changed event with no Order data")
 			return nil
 		}
 		if data.Order.Kdsstate == "" {
-			log.Println("Ignoring Order Changed event with empty Kdsstate")
+			slog.Info("Ignoring Order Changed event with empty Kdsstate")
 			return nil
 		}
 		return s.handleOrderStatusChange(data)
 
 	case "Print Receipt":
 		if data.Order == nil {
-			log.Println("Ignoring Print Receipt event with no Order data")
+			slog.Info("Ignoring Print Receipt event with no Order data")
 			return nil
 		}
 		return s.handleOrderStatusChange(data)
 
 	default:
-		log.Println("Unhandled event:", data.Name)
+		slog.Info("Unhandled event", "name", data.Name)
 		return nil
 	}
 	return nil
@@ -73,7 +71,7 @@ func (s *RkNotifyHandleService) handleOrderStatusChange(data *models.Rk7NotifyEv
 	orderGUID := data.Order.GUID
 	newStatus := data.Order.Kdsstate
 
-	log.Printf("Processing order %s with status: %s", orderGUID, newStatus)
+	slog.Info("Processing order", "guid", orderGUID, "status", newStatus)
 
 	// Try to get existing order state from DB
 	existingState, err := s.orderRepo.GetByOrderGuid(orderGUID)
@@ -82,16 +80,16 @@ func (s *RkNotifyHandleService) handleOrderStatusChange(data *models.Rk7NotifyEv
 		// Check if error is "record not found"
 		if err == gorm.ErrRecordNotFound {
 			// Order not found in DB - add new order
-			log.Printf("New order detected: %s, adding to DB with status: %s", orderGUID, newStatus)
+			slog.Info("New order detected, adding to DB", "guid", orderGUID, "status", newStatus)
 
 			newOrderState := &models.OrderState{
-				OriginalOrderId: data.Order.OrderName,
-				OrderGUID:       data.Order.GUID,
+				OriginalOrderId: orderGUID,
+				OrderGUID:       orderGUID,
 				Kdsstate:        newStatus,
 			}
 
 			if err := s.orderRepo.Create(newOrderState); err != nil {
-				log.Printf("Failed to create order state in DB: %v", err)
+				slog.Error("Failed to create order state in DB", "error", err)
 				return err
 			}
 
@@ -100,21 +98,21 @@ func (s *RkNotifyHandleService) handleOrderStatusChange(data *models.Rk7NotifyEv
 		}
 
 		// Other database error
-		log.Printf("Database error while getting order state: %v", err)
+		slog.Error("Database error while getting order state", "error", err)
 		return err
 	}
 
 	// Order found in DB - check if status changed
 	if existingState.Kdsstate == newStatus {
-		log.Printf("Order %s status unchanged (%s), ignoring event", orderGUID, newStatus)
+		slog.Info("Order status unchanged, ignoring event", "guid", orderGUID, "status", newStatus)
 		return nil
 	}
 
 	// Status changed - update DB and send event
-	log.Printf("Order %s status changed: %s -> %s", orderGUID, existingState.Kdsstate, newStatus)
+	slog.Info("Order status changed", "guid", orderGUID, "oldStatus", existingState.Kdsstate, "newStatus", newStatus)
 
 	if err := s.orderRepo.UpdateStatus(orderGUID, newStatus); err != nil {
-		log.Printf("Failed to update order state in DB: %v", err)
+		slog.Error("Failed to update order state in DB", "error", err)
 		return err
 	}
 
@@ -128,10 +126,10 @@ func (s *RkNotifyHandleService) sendToExternalAPI(data *models.Rk7NotifyEvent) e
 
 	// Send to external API
 	if err := s.externalClient.SendEvent(externalEvent); err != nil {
-		log.Printf("Failed to send event to external API: %v", err)
+		slog.Error("Failed to send event to external API", "error", err)
 		return err
 	}
 
-	log.Printf("Event forwarded successfully: %s", externalEvent.ResponseEventCommon.EventGUID)
+	slog.Info("Event forwarded successfully", "guid", externalEvent.ResponseEventCommon.EventGUID)
 	return nil
 }

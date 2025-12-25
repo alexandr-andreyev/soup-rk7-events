@@ -11,6 +11,7 @@ type Config struct {
 	Server   ServerConfig   `yaml:"server"`
 	External ExternalConfig `yaml:"external"`
 	Database DatabaseConfig `yaml:"database"`
+	Logging  LoggingConfig  `yaml:"logging"`
 }
 
 type ServerConfig struct {
@@ -28,6 +29,10 @@ type ExternalConfig struct {
 
 type DatabaseConfig struct {
 	Path string `yaml:"path"`
+}
+
+type LoggingConfig struct {
+	Directory string `yaml:"directory"`
 }
 
 func Load(path string) (*Config, error) {
@@ -62,6 +67,9 @@ func Load(path string) (*Config, error) {
 	}
 	if cfg.Database.Path == "" {
 		cfg.Database.Path = "orders.db"
+	}
+	if cfg.Logging.Directory == "" {
+		cfg.Logging.Directory = "logs"
 	}
 
 	return &cfg, nil

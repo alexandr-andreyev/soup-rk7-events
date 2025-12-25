@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
+	"log/slog"
 	"net/http"
 	"time"
 
@@ -37,7 +37,7 @@ func (c *ExternalClient) SendEvent(event *models.ExternalEvent) error {
 	var lastErr error
 	for attempt := 1; attempt <= c.config.MaxRetries; attempt++ {
 		if attempt > 1 {
-			log.Printf("Retry attempt %d/%d for event %s", attempt, c.config.MaxRetries, event.ResponseEventCommon.EventGUID)
+			slog.Info("Retry attempt", "attempt", attempt, "maxRetries", c.config.MaxRetries, "guid", event.ResponseEventCommon.EventGUID)
 			time.Sleep(time.Duration(c.config.RetryDelay) * time.Second)
 		}
 
@@ -52,7 +52,7 @@ func (c *ExternalClient) SendEvent(event *models.ExternalEvent) error {
 		resp, err := c.httpClient.Do(req)
 		if err != nil {
 			lastErr = fmt.Errorf("request failed: %w", err)
-			log.Printf("Attempt %d failed: %v", attempt, err)
+			slog.Warn("Attempt failed", "attempt", attempt, "error", err)
 			continue
 		}
 
@@ -62,12 +62,12 @@ func (c *ExternalClient) SendEvent(event *models.ExternalEvent) error {
 
 		// Check if request was successful
 		if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-			log.Printf("Event sent successfully: %s (status: %d)", event.ResponseEventCommon.EventGUID, resp.StatusCode)
+			slog.Info("Event sent successfully", "guid", event.ResponseEventCommon.EventGUID, "status", resp.StatusCode)
 			return nil
 		}
 
 		lastErr = fmt.Errorf("server returned status %d: %s", resp.StatusCode, string(body))
-		log.Printf("Attempt %d failed with status %d: %s", attempt, resp.StatusCode, string(body))
+		slog.Warn("Attempt failed with non-success status", "attempt", attempt, "status", resp.StatusCode, "body", string(body))
 
 		// Don't retry on 4xx errors (client errors)
 		if resp.StatusCode >= 400 && resp.StatusCode < 500 {

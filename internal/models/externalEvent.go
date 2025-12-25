@@ -1,6 +1,10 @@
 package models
 
-import "time"
+import (
+	"time"
+
+	"github.com/google/uuid"
+)
 
 // ExternalEvent represents the JSON payload sent to external API
 type ExternalEvent struct {
@@ -9,7 +13,7 @@ type ExternalEvent struct {
 }
 
 type ResponseEventCommon struct {
-	ObjectID                            int64  `json:"objectId"`
+	ObjectID                            string `json:"objectId"`
 	AgentGUID                           string `json:"agentGuid"`
 	EventGUID                           string `json:"eventGuid"`
 	DateTimeServerReceiveEventFromAgent string `json:"dateTimeServerReceiveEventFromAgent"`
@@ -38,9 +42,9 @@ type RejectingReason struct {
 func (rk7 *Rk7NotifyEvent) ToExternalEvent() *ExternalEvent {
 	event := &ExternalEvent{
 		ResponseEventCommon: ResponseEventCommon{
-			ObjectID:                            0,
-			AgentGUID:                           "",
-			EventGUID:                           rk7.GUID,
+			ObjectID:                            rk7.RestCode,
+			AgentGUID:                           rk7.RestCode + "-agent",
+			EventGUID:                           uuid.New().String(),
 			DateTimeServerReceiveEventFromAgent: time.Now().Format(time.RFC3339),
 			EventType:                           mapEventType(rk7.Name),
 		},

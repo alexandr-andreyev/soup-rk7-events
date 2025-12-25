@@ -31,7 +31,7 @@ The service can be removed from an Administrative command prompt by typing:
     YourExecutable.EXE remove 
 
 
-
+<Prop name="{79D8D0EC-1DE1-4F21-9105-388384215A90}" value="190cc89af297b8315b9"/> - originalOrderId
 
 
 

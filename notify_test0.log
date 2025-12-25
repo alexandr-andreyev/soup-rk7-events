@@ -1,0 +1,615 @@
+23.12.2025 17:46:21:247 INIT: Start thread, DriverVersion 41.0, ID = 0, URL: http://127.0.0.1:13444/rkevent
+23.12.2025 17:46:21:247 Start httpnotf.dll: DriverVersion 41.0
+23.12.2025 17:46:21:247 SEND_THREAD: MidServ - waiting for initialization
+23.12.2025 17:46:21:247 SEND_THREAD: MidServ - initialization complete
+23.12.2025 17:46:21:263 XML: NotifyStart:
+<?xml version="1.0" encoding="utf-8"?>
+<a RestCode="245920100" DateTime="2025-12-23T17:46:21" Situation="1" seqnumber="1" guid="{9ECCB1B5-97EE-4B88-9840-8568F05586D0}" name="Started" ShiftNum="85" ShiftDate="2025-12-23T00:00:00">
+  <Server id="15963"/>
+  <Item/>
+</a>
+23.12.2025 17:46:21:263 SEND_THREAD: Waiting for signals...
+23.12.2025 17:46:21:263 SEND_THREAD: Signal [Send] ENTER, items in queue: 1
+23.12.2025 17:46:21:263 HTTP: Sending XML on address: http://127.0.0.1:13444/rkevent
+23.12.2025 17:46:21:263 HTTP: Post done
+23.12.2025 17:46:21:263 SEND_THREAD: Signal [Send] LEAVE, items in queue: 0
+23.12.2025 17:46:21:263 SEND_THREAD: Waiting for signals...
+23.12.2025 17:47:09:395 XML: OnReceiveXml:
+<?xml version="1.0" encoding="utf-8"?>
+<a RestCode="245920100" DateTime="2025-12-23T17:47:09" Situation="21" seqnumber="10" guid="{81A89081-D394-4070-BD37-A8E54CCA7B56}" name="Login" sender_info="rk7" ShiftNum="85" ShiftDate="2025-12-23T00:00:00">
+	<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}" NetName="DEVCASH001"/>
+	<Server id="15963" code="15963" name="DEVSERVER" guid="{3FAA0AE2-583B-4C12-9F3F-AABED8F6D694}" NetName="DEVSERVER"/>
+	<Waiter id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+		<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+	</Waiter>
+	<Item/>
+</a>
+23.12.2025 17:47:09:395 SEND_THREAD: Signal [Send] ENTER, items in queue: 1
+23.12.2025 17:47:09:395 HTTP: Sending XML on address: http://127.0.0.1:13444/rkevent
+23.12.2025 17:47:09:395 XML: OnReceiveXml: Skipped situation "22 - Open window"
+23.12.2025 17:47:09:410 HTTP: Post done
+23.12.2025 17:47:09:410 SEND_THREAD: Signal [Send] LEAVE, items in queue: 0
+23.12.2025 17:47:09:410 SEND_THREAD: Waiting for signals...
+23.12.2025 17:47:09:410 XML: OnReceiveXml: Skipped situation "2 - Main Menu"
+23.12.2025 17:47:09:410 XML: OnReceiveXml: Skipped situation "22 - Open window"
+23.12.2025 17:47:10:545 XML: OnReceiveXml: Skipped situation "22 - Open window"
+23.12.2025 17:47:12:046 XML: OnReceiveXml:
+<?xml version="1.0" encoding="utf-8"?>
+<a RestCode="245920100" DateTime="2025-12-23T17:47:11" Situation="12" seqnumber="15" guid="{957218BA-6F52-4D14-B88E-4981F6DE22BF}" name="Open Order" sender_info="rk7" ShiftNum="85" ShiftDate="2025-12-23T00:00:00">
+	<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}" NetName="DEVCASH001"/>
+	<Server id="15963" code="15963" name="DEVSERVER" guid="{3FAA0AE2-583B-4C12-9F3F-AABED8F6D694}" NetName="DEVSERVER"/>
+	<Waiter id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+		<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+	</Waiter>
+	<Order visit="621807431" orderIdent="256" guid="{39EAF303-54B2-4057-8BBF-25317D5A61B1}" url="http://code.ucs.ru/qr?id=3FAA0AE2583B4C129F3FAABED8F6D69439EAF30354B240578BBF25317D5A61B16D5378B0" orderName="WSA3" locked="1" version="1" crc32="0" orderSum="40000" unpaidSum="40000" discountSum="-15000" totalPieces="1000" seqNumber="1" paid="0" finished="0" persistentComment="НЕ ГОТОВИТЬ ЭТОТ ЗАКАЗ" nonPersistentComment="" openTime="2025-12-23T17:36:10" kdsstate="sent">
+		<Creator id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Creator>
+		<Waiter id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Waiter>
+		<OrderCategory id="1172070" code="101" name="Отдел разработок" guid="{B094E7D4-C766-4D4F-BA20-C5AE7B2384BA}"/>
+		<OrderType id="1016010" code="3" name="Доставка" guid="{E0592178-9EEC-40C7-9731-7D367327AF58}"/>
+		<Table id="1210729" code="2505" name="WSA3" guid="{00000002-E410-4260-88CC-B4B11BF041F5}"/>
+		<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+		<GuestType id="1090721" code="3" name="Интернет заказ" guid="{73C3EBD4-858A-46A2-9FC6-58E591E900A5}"/>
+		<ExternalProps>
+			<Prop name="{79D8D0EC-1DE1-4F21-9105-388384215A90}" value="190cc89af297b8315b9"/>
+			<Prop name="{A598C6FD-E347-414C-8E40-E5B846973ACF}" value="+77331122333"/>
+			<Prop name="{3F2D3287-35FD-407C-AE39-BF8155A67660}" value="TEST"/>
+			<Prop name="{53675C7A-981A-43BA-B022-60860143E208}" value="+77331122333"/>
+			<Prop name="{DF77A2D3-405D-4A5D-B8B6-4150533A2F1D}" value="ae2cb7e6-19c6-43be-b485-f4d6badc4f10"/>
+			<Prop name="{B84CB355-4E2E-4B42-A0AC-367329DA13BF}" value=""/>
+			<Prop name="{E22A6905-676E-4D8D-8E6E-FAB1B8F418EC}" value="cb-app-190"/>
+			<Prop name="42" value=""/>
+			<Prop name="{7DC7AF79-1D00-4573-BE8A-A02C6FA3B430}" value="A69"/>
+		</ExternalProps>
+	</Order>
+	<Session uni="1" line_guid="{0B2CCEE4-7213-4B1E-9501-FFB511A3F78A}" state="4" sessionID="1" isDraft="0" remindTime="2025-12-23T17:36:13" startService="2025-12-23T17:36:13" readyTime="2025-12-15T16:35:25" printed="1" cookMins="5">
+		<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+		<Author id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Author>
+		<Creator id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Creator>
+		<Dish id="1270142" code="1001656" name="Вода 0,5 (пластик) с газом" guid="{37A843E6-052A-4F53-9E7F-72AF74F7909A}" uni="2" line_guid="{19230AED-C905-43BF-AE4F-643DD20AE7D4}" state="4" price="55000" priceListAmount="55000" amount="40000" kdsstate="sent" sortOrder="0" quantity="1000" srcQuantity="1000"/>
+		<Discount id="1268651" code="1000437" name="Yandex Promo *" guid="{5F472EB5-709D-4BB1-BB7F-B7F0588FB8D2}" uni="3" line_guid="{D04F1E74-64C2-402C-BDB5-CDC16096BA37}" state="4" amount="-15000" discountSum="-15000" charge_source="xmlInterface"/>
+		<PriceScale id="1086962" code="122" name="ТРЦ" guid="{6F184E7C-51DF-4D2E-A482-9531DFC564DA}"/>
+		<TradeGroup id="7" code="1" name="По-умолчанию" guid="{C760850F-8955-42A8-AE47-A8714EE9FFC8}"/>
+	</Session>
+	<Session uni="201" line_guid="{89DCA0F7-4CDE-456E-B793-47DAB4D79B7C}" state="1" sessionID="201" isDraft="0" remindTime="2025-12-23T17:47:00" startService="2025-12-23T17:47:11" printed="0" cookMins="0">
+		<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+		<Author id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+			<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+		</Author>
+		<Creator id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+			<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+		</Creator>
+		<PriceScale id="1086962" code="122" name="ТРЦ" guid="{6F184E7C-51DF-4D2E-A482-9531DFC564DA}"/>
+		<TradeGroup id="7" code="1" name="По-умолчанию" guid="{C760850F-8955-42A8-AE47-A8714EE9FFC8}"/>
+	</Session>
+	<Item ClassName="TOrder"/>
+</a>
+23.12.2025 17:47:12:046 XML: OnReceiveXml -> corrected:
+<?xml version="1.0" encoding="utf-8"?>
+<a RestCode="245920100" DateTime="2025-12-23T17:47:12" Situation="12" seqnumber="15" guid="{957218BA-6F52-4D14-B88E-4981F6DE22BF}" name="Open Order" sender_info="rk7" ShiftNum="85" ShiftDate="2025-12-23T00:00:00">
+	<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}" NetName="DEVCASH001"/>
+	<Server id="15963" code="15963" name="DEVSERVER" guid="{3FAA0AE2-583B-4C12-9F3F-AABED8F6D694}" NetName="DEVSERVER"/>
+	<Waiter id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+		<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+	</Waiter>
+	<Order visit="621807431" orderIdent="256" guid="{39EAF303-54B2-4057-8BBF-25317D5A61B1}" url="http://code.ucs.ru/qr?id=3FAA0AE2583B4C129F3FAABED8F6D69439EAF30354B240578BBF25317D5A61B16D5378B0" orderName="WSA3" locked="1" version="1" crc32="0" orderSum="40000" unpaidSum="40000" discountSum="-15000" totalPieces="1000" seqNumber="1" paid="0" finished="0" persistentComment="НЕ ГОТОВИТЬ ЭТОТ ЗАКАЗ" nonPersistentComment="" openTime="2025-12-23T17:36:10" kdsstate="sent">
+		<Creator id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Creator>
+		<Waiter id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Waiter>
+		<OrderCategory id="1172070" code="101" name="Отдел разработок" guid="{B094E7D4-C766-4D4F-BA20-C5AE7B2384BA}"/>
+		<OrderType id="1016010" code="3" name="Доставка" guid="{E0592178-9EEC-40C7-9731-7D367327AF58}"/>
+		<Table id="1210729" code="2505" name="WSA3" guid="{00000002-E410-4260-88CC-B4B11BF041F5}"/>
+		<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+		<GuestType id="1090721" code="3" name="Интернет заказ" guid="{73C3EBD4-858A-46A2-9FC6-58E591E900A5}"/>
+		<ExternalProps>
+			<Prop name="{79D8D0EC-1DE1-4F21-9105-388384215A90}" value="190cc89af297b8315b9"/>
+			<Prop name="{A598C6FD-E347-414C-8E40-E5B846973ACF}" value="+77331122333"/>
+			<Prop name="{3F2D3287-35FD-407C-AE39-BF8155A67660}" value="TEST"/>
+			<Prop name="{53675C7A-981A-43BA-B022-60860143E208}" value="+77331122333"/>
+			<Prop name="{DF77A2D3-405D-4A5D-B8B6-4150533A2F1D}" value="ae2cb7e6-19c6-43be-b485-f4d6badc4f10"/>
+			<Prop name="{B84CB355-4E2E-4B42-A0AC-367329DA13BF}" value=""/>
+			<Prop name="{E22A6905-676E-4D8D-8E6E-FAB1B8F418EC}" value="cb-app-190"/>
+			<Prop name="42" value=""/>
+			<Prop name="{7DC7AF79-1D00-4573-BE8A-A02C6FA3B430}" value="A69"/>
+		</ExternalProps>
+		<Session uni="201" line_guid="{89DCA0F7-4CDE-456E-B793-47DAB4D79B7C}" state="1" sessionID="201" isDraft="0" remindTime="2025-12-23T17:47:00" startService="2025-12-23T17:47:11" printed="0" cookMins="0">
+			<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+			<Author id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+				<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+			</Author>
+			<Creator id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+				<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+			</Creator>
+			<PriceScale id="1086962" code="122" name="ТРЦ" guid="{6F184E7C-51DF-4D2E-A482-9531DFC564DA}"/>
+			<TradeGroup id="7" code="1" name="По-умолчанию" guid="{C760850F-8955-42A8-AE47-A8714EE9FFC8}"/>
+		</Session>
+		<Session uni="1" line_guid="{0B2CCEE4-7213-4B1E-9501-FFB511A3F78A}" state="4" sessionID="1" isDraft="0" remindTime="2025-12-23T17:36:13" startService="2025-12-23T17:36:13" readyTime="2025-12-15T16:35:25" printed="1" cookMins="5">
+			<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+			<Author id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+				<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+			</Author>
+			<Creator id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+				<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+			</Creator>
+			<Dish id="1270142" code="1001656" name="Вода 0,5 (пластик) с газом" guid="{37A843E6-052A-4F53-9E7F-72AF74F7909A}" uni="2" line_guid="{19230AED-C905-43BF-AE4F-643DD20AE7D4}" state="4" price="55000" priceListAmount="55000" amount="40000" kdsstate="sent" sortOrder="0" quantity="1000" srcQuantity="1000"/>
+			<Discount id="1268651" code="1000437" name="Yandex Promo *" guid="{5F472EB5-709D-4BB1-BB7F-B7F0588FB8D2}" uni="3" line_guid="{D04F1E74-64C2-402C-BDB5-CDC16096BA37}" state="4" amount="-15000" discountSum="-15000" charge_source="xmlInterface"/>
+			<PriceScale id="1086962" code="122" name="ТРЦ" guid="{6F184E7C-51DF-4D2E-A482-9531DFC564DA}"/>
+			<TradeGroup id="7" code="1" name="По-умолчанию" guid="{C760850F-8955-42A8-AE47-A8714EE9FFC8}"/>
+		</Session>
+	</Order>
+	<Session uni="1" line_guid="{0B2CCEE4-7213-4B1E-9501-FFB511A3F78A}" state="4" sessionID="1" isDraft="0" remindTime="2025-12-23T17:36:13" startService="2025-12-23T17:36:13" readyTime="2025-12-15T16:35:25" printed="1" cookMins="5">
+		<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+		<Author id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Author>
+		<Creator id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Creator>
+		<Dish id="1270142" code="1001656" name="Вода 0,5 (пластик) с газом" guid="{37A843E6-052A-4F53-9E7F-72AF74F7909A}" uni="2" line_guid="{19230AED-C905-43BF-AE4F-643DD20AE7D4}" state="4" price="55000" priceListAmount="55000" amount="40000" kdsstate="sent" sortOrder="0" quantity="1000" srcQuantity="1000"/>
+		<Discount id="1268651" code="1000437" name="Yandex Promo *" guid="{5F472EB5-709D-4BB1-BB7F-B7F0588FB8D2}" uni="3" line_guid="{D04F1E74-64C2-402C-BDB5-CDC16096BA37}" state="4" amount="-15000" discountSum="-15000" charge_source="xmlInterface"/>
+		<PriceScale id="1086962" code="122" name="ТРЦ" guid="{6F184E7C-51DF-4D2E-A482-9531DFC564DA}"/>
+		<TradeGroup id="7" code="1" name="По-умолчанию" guid="{C760850F-8955-42A8-AE47-A8714EE9FFC8}"/>
+	</Session>
+	<Session uni="201" line_guid="{89DCA0F7-4CDE-456E-B793-47DAB4D79B7C}" state="1" sessionID="201" isDraft="0" remindTime="2025-12-23T17:47:00" startService="2025-12-23T17:47:11" printed="0" cookMins="0">
+		<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+		<Author id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+			<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+		</Author>
+		<Creator id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+			<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+		</Creator>
+		<PriceScale id="1086962" code="122" name="ТРЦ" guid="{6F184E7C-51DF-4D2E-A482-9531DFC564DA}"/>
+		<TradeGroup id="7" code="1" name="По-умолчанию" guid="{C760850F-8955-42A8-AE47-A8714EE9FFC8}"/>
+	</Session>
+	<Item ClassName="TOrder"/>
+</a>
+23.12.2025 17:47:12:046 SEND_THREAD: Signal [Send] ENTER, items in queue: 1
+23.12.2025 17:47:12:046 HTTP: Sending XML on address: http://127.0.0.1:13444/rkevent
+23.12.2025 17:47:12:062 XML: OnReceiveXml: Skipped situation "22 - Open window"
+23.12.2025 17:47:12:062 HTTP: Post done
+23.12.2025 17:47:12:062 SEND_THREAD: Signal [Send] LEAVE, items in queue: 0
+23.12.2025 17:47:12:062 SEND_THREAD: Waiting for signals...
+23.12.2025 17:47:18:457 XML: OnReceiveXml:
+<?xml version="1.0" encoding="utf-8"?>
+<a RestCode="245920100" DateTime="2025-12-23T17:47:18" Situation="3" seqnumber="1" guid="{8A4AB428-B1AB-4301-A400-A3B889A1F7CA}" name="Order Changed" sender_info="rk7" ShiftNum="85" ShiftDate="2025-12-23T00:00:00">
+	<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}" NetName="DEVCASH001"/>
+	<Server id="15963" code="15963" name="DEVSERVER" guid="{3FAA0AE2-583B-4C12-9F3F-AABED8F6D694}" NetName="DEVSERVER"/>
+	<Waiter id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+		<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+	</Waiter>
+	<Order visit="621807431" orderIdent="256" guid="{39EAF303-54B2-4057-8BBF-25317D5A61B1}" url="http://code.ucs.ru/qr?id=3FAA0AE2583B4C129F3FAABED8F6D69439EAF30354B240578BBF25317D5A61B16D5378B0" orderName="WSA3" locked="1" version="1" crc32="-2090246072" orderSum="40000" unpaidSum="40000" discountSum="-15000" totalPieces="1000" seqNumber="1" paid="0" finished="0" persistentComment="НЕ ГОТОВИТЬ ЭТОТ ЗАКАЗ" nonPersistentComment="" openTime="2025-12-23T17:36:10" kdsstate="ready">
+		<Creator id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Creator>
+		<Waiter id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Waiter>
+		<OrderCategory id="1172070" code="101" name="Отдел разработок" guid="{B094E7D4-C766-4D4F-BA20-C5AE7B2384BA}"/>
+		<OrderType id="1016010" code="3" name="Доставка" guid="{E0592178-9EEC-40C7-9731-7D367327AF58}"/>
+		<Table id="1210729" code="2505" name="WSA3" guid="{00000002-E410-4260-88CC-B4B11BF041F5}"/>
+		<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+		<GuestType id="1090721" code="3" name="Интернет заказ" guid="{73C3EBD4-858A-46A2-9FC6-58E591E900A5}"/>
+		<ExternalProps>
+			<Prop name="{7DC7AF79-1D00-4573-BE8A-A02C6FA3B430}" value="A69"/>
+			<Prop name="42" value=""/>
+			<Prop name="{E22A6905-676E-4D8D-8E6E-FAB1B8F418EC}" value="cb-app-190"/>
+			<Prop name="{B84CB355-4E2E-4B42-A0AC-367329DA13BF}" value=""/>
+			<Prop name="{DF77A2D3-405D-4A5D-B8B6-4150533A2F1D}" value="ae2cb7e6-19c6-43be-b485-f4d6badc4f10"/>
+			<Prop name="{53675C7A-981A-43BA-B022-60860143E208}" value="+77331122333"/>
+			<Prop name="{3F2D3287-35FD-407C-AE39-BF8155A67660}" value="TEST"/>
+			<Prop name="{A598C6FD-E347-414C-8E40-E5B846973ACF}" value="+77331122333"/>
+			<Prop name="{79D8D0EC-1DE1-4F21-9105-388384215A90}" value="190cc89af297b8315b9"/>
+		</ExternalProps>
+	</Order>
+	<Session uni="1" line_guid="{0B2CCEE4-7213-4B1E-9501-FFB511A3F78A}" state="4" sessionID="1" isDraft="0" remindTime="2025-12-23T17:36:13" startService="2025-12-23T17:36:13" readyTime="2025-12-15T16:35:25" printed="1" cookMins="5">
+		<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+		<Author id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Author>
+		<Creator id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Creator>
+		<Dish id="1270142" code="1001656" name="Вода 0,5 (пластик) с газом" guid="{37A843E6-052A-4F53-9E7F-72AF74F7909A}" uni="2" line_guid="{19230AED-C905-43BF-AE4F-643DD20AE7D4}" state="4" price="55000" priceListAmount="55000" amount="40000" kdsstate="ready" sortOrder="0" quantity="1000" srcQuantity="1000"/>
+		<Discount id="1268651" code="1000437" name="Yandex Promo *" guid="{5F472EB5-709D-4BB1-BB7F-B7F0588FB8D2}" uni="3" line_guid="{D04F1E74-64C2-402C-BDB5-CDC16096BA37}" state="4" amount="-15000" discountSum="-15000" charge_source="xmlInterface"/>
+		<PriceScale id="1086962" code="122" name="ТРЦ" guid="{6F184E7C-51DF-4D2E-A482-9531DFC564DA}"/>
+		<TradeGroup id="7" code="1" name="По-умолчанию" guid="{C760850F-8955-42A8-AE47-A8714EE9FFC8}"/>
+	</Session>
+	<Item/>
+	<ChangeLog>
+		<Dish id="1270142" code="1001656" name="Вода 0,5 (пластик) с газом" guid="{37A843E6-052A-4F53-9E7F-72AF74F7909A}" uni="2" line_guid="{19230AED-C905-43BF-AE4F-643DD20AE7D4}" state="4" price="55000" priceListAmount="55000" amount="40000" kdsstate="ready" sortOrder="0" quantity="1000" srcQuantity="1000" number="1" oldvalue="1" newvalue="3" OldStrValue="sent" NewStrValue="ready" changed="1">
+			<Oper id="263" name="Изменение КДС-статуса у блюда" guid="{7C5BD723-F0E7-4AD3-9CFD-F3E752B366EE}"/>
+		</Dish>
+	</ChangeLog>
+</a>
+23.12.2025 17:47:18:457 XML: OnReceiveXml -> corrected:
+<?xml version="1.0" encoding="utf-8"?>
+<a RestCode="245920100" DateTime="2025-12-23T17:47:18" Situation="3" seqnumber="1" guid="{8A4AB428-B1AB-4301-A400-A3B889A1F7CA}" name="Order Changed" sender_info="rk7" ShiftNum="85" ShiftDate="2025-12-23T00:00:00">
+	<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}" NetName="DEVCASH001"/>
+	<Server id="15963" code="15963" name="DEVSERVER" guid="{3FAA0AE2-583B-4C12-9F3F-AABED8F6D694}" NetName="DEVSERVER"/>
+	<Waiter id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+		<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+	</Waiter>
+	<Order visit="621807431" orderIdent="256" guid="{39EAF303-54B2-4057-8BBF-25317D5A61B1}" url="http://code.ucs.ru/qr?id=3FAA0AE2583B4C129F3FAABED8F6D69439EAF30354B240578BBF25317D5A61B16D5378B0" orderName="WSA3" locked="1" version="1" crc32="-2090246072" orderSum="40000" unpaidSum="40000" discountSum="-15000" totalPieces="1000" seqNumber="1" paid="0" finished="0" persistentComment="НЕ ГОТОВИТЬ ЭТОТ ЗАКАЗ" nonPersistentComment="" openTime="2025-12-23T17:36:10" kdsstate="ready">
+		<Creator id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Creator>
+		<Waiter id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Waiter>
+		<OrderCategory id="1172070" code="101" name="Отдел разработок" guid="{B094E7D4-C766-4D4F-BA20-C5AE7B2384BA}"/>
+		<OrderType id="1016010" code="3" name="Доставка" guid="{E0592178-9EEC-40C7-9731-7D367327AF58}"/>
+		<Table id="1210729" code="2505" name="WSA3" guid="{00000002-E410-4260-88CC-B4B11BF041F5}"/>
+		<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+		<GuestType id="1090721" code="3" name="Интернет заказ" guid="{73C3EBD4-858A-46A2-9FC6-58E591E900A5}"/>
+		<ExternalProps>
+			<Prop name="{7DC7AF79-1D00-4573-BE8A-A02C6FA3B430}" value="A69"/>
+			<Prop name="42" value=""/>
+			<Prop name="{E22A6905-676E-4D8D-8E6E-FAB1B8F418EC}" value="cb-app-190"/>
+			<Prop name="{B84CB355-4E2E-4B42-A0AC-367329DA13BF}" value=""/>
+			<Prop name="{DF77A2D3-405D-4A5D-B8B6-4150533A2F1D}" value="ae2cb7e6-19c6-43be-b485-f4d6badc4f10"/>
+			<Prop name="{53675C7A-981A-43BA-B022-60860143E208}" value="+77331122333"/>
+			<Prop name="{3F2D3287-35FD-407C-AE39-BF8155A67660}" value="TEST"/>
+			<Prop name="{A598C6FD-E347-414C-8E40-E5B846973ACF}" value="+77331122333"/>
+			<Prop name="{79D8D0EC-1DE1-4F21-9105-388384215A90}" value="190cc89af297b8315b9"/>
+		</ExternalProps>
+		<Session uni="1" line_guid="{0B2CCEE4-7213-4B1E-9501-FFB511A3F78A}" state="4" sessionID="1" isDraft="0" remindTime="2025-12-23T17:36:13" startService="2025-12-23T17:36:13" readyTime="2025-12-15T16:35:25" printed="1" cookMins="5">
+			<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+			<Author id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+				<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+			</Author>
+			<Creator id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+				<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+			</Creator>
+			<Dish id="1270142" code="1001656" name="Вода 0,5 (пластик) с газом" guid="{37A843E6-052A-4F53-9E7F-72AF74F7909A}" uni="2" line_guid="{19230AED-C905-43BF-AE4F-643DD20AE7D4}" state="4" price="55000" priceListAmount="55000" amount="40000" kdsstate="ready" sortOrder="0" quantity="1000" srcQuantity="1000"/>
+			<Discount id="1268651" code="1000437" name="Yandex Promo *" guid="{5F472EB5-709D-4BB1-BB7F-B7F0588FB8D2}" uni="3" line_guid="{D04F1E74-64C2-402C-BDB5-CDC16096BA37}" state="4" amount="-15000" discountSum="-15000" charge_source="xmlInterface"/>
+			<PriceScale id="1086962" code="122" name="ТРЦ" guid="{6F184E7C-51DF-4D2E-A482-9531DFC564DA}"/>
+			<TradeGroup id="7" code="1" name="По-умолчанию" guid="{C760850F-8955-42A8-AE47-A8714EE9FFC8}"/>
+		</Session>
+	</Order>
+	<Session uni="1" line_guid="{0B2CCEE4-7213-4B1E-9501-FFB511A3F78A}" state="4" sessionID="1" isDraft="0" remindTime="2025-12-23T17:36:13" startService="2025-12-23T17:36:13" readyTime="2025-12-15T16:35:25" printed="1" cookMins="5">
+		<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+		<Author id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Author>
+		<Creator id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Creator>
+		<Dish id="1270142" code="1001656" name="Вода 0,5 (пластик) с газом" guid="{37A843E6-052A-4F53-9E7F-72AF74F7909A}" uni="2" line_guid="{19230AED-C905-43BF-AE4F-643DD20AE7D4}" state="4" price="55000" priceListAmount="55000" amount="40000" kdsstate="ready" sortOrder="0" quantity="1000" srcQuantity="1000"/>
+		<Discount id="1268651" code="1000437" name="Yandex Promo *" guid="{5F472EB5-709D-4BB1-BB7F-B7F0588FB8D2}" uni="3" line_guid="{D04F1E74-64C2-402C-BDB5-CDC16096BA37}" state="4" amount="-15000" discountSum="-15000" charge_source="xmlInterface"/>
+		<PriceScale id="1086962" code="122" name="ТРЦ" guid="{6F184E7C-51DF-4D2E-A482-9531DFC564DA}"/>
+		<TradeGroup id="7" code="1" name="По-умолчанию" guid="{C760850F-8955-42A8-AE47-A8714EE9FFC8}"/>
+	</Session>
+	<Item/>
+	<ChangeLog>
+		<Dish id="1270142" code="1001656" name="Вода 0,5 (пластик) с газом" guid="{37A843E6-052A-4F53-9E7F-72AF74F7909A}" uni="2" line_guid="{19230AED-C905-43BF-AE4F-643DD20AE7D4}" state="4" price="55000" priceListAmount="55000" amount="40000" kdsstate="ready" sortOrder="0" quantity="1000" srcQuantity="1000" number="1" oldvalue="1" newvalue="3" OldStrValue="sent" NewStrValue="ready" changed="1">
+			<Oper id="263" name="Изменение КДС-статуса у блюда" guid="{7C5BD723-F0E7-4AD3-9CFD-F3E752B366EE}"/>
+		</Dish>
+	</ChangeLog>
+</a>
+23.12.2025 17:47:18:457 SEND_THREAD: Signal [Send] ENTER, items in queue: 1
+23.12.2025 17:47:18:457 HTTP: Sending XML on address: http://127.0.0.1:13444/rkevent
+23.12.2025 17:47:18:749 HTTP: Post done
+23.12.2025 17:47:18:749 SEND_THREAD: Signal [Send] LEAVE, items in queue: 0
+23.12.2025 17:47:18:749 SEND_THREAD: Waiting for signals...
+23.12.2025 17:47:20:519 XML: OnReceiveXml:
+<?xml version="1.0" encoding="utf-8"?>
+<a RestCode="245920100" DateTime="2025-12-23T17:47:20" Situation="13" seqnumber="17" guid="{9D1EC578-606D-4248-8281-AFBCE6B16B36}" name="Save Order" sender_info="rk7" ShiftNum="85" ShiftDate="2025-12-23T00:00:00">
+	<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}" NetName="DEVCASH001"/>
+	<Server id="15963" code="15963" name="DEVSERVER" guid="{3FAA0AE2-583B-4C12-9F3F-AABED8F6D694}" NetName="DEVSERVER"/>
+	<Waiter id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+		<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+	</Waiter>
+	<Order visit="621807431" orderIdent="256" guid="{39EAF303-54B2-4057-8BBF-25317D5A61B1}" url="http://code.ucs.ru/qr?id=3FAA0AE2583B4C129F3FAABED8F6D69439EAF30354B240578BBF25317D5A61B16D5378B0" orderName="WSA3" locked="1" version="2" crc32="0" orderSum="40000" unpaidSum="40000" discountSum="-15000" totalPieces="1000" seqNumber="1" paid="0" finished="0" persistentComment="НЕ ГОТОВИТЬ ЭТОТ ЗАКАЗ" nonPersistentComment="" openTime="2025-12-23T17:36:10" kdsstate="ready">
+		<Creator id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Creator>
+		<Waiter id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+			<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+		</Waiter>
+		<OrderCategory id="1172070" code="101" name="Отдел разработок" guid="{B094E7D4-C766-4D4F-BA20-C5AE7B2384BA}"/>
+		<OrderType id="1016010" code="3" name="Доставка" guid="{E0592178-9EEC-40C7-9731-7D367327AF58}"/>
+		<Table id="1210729" code="2505" name="WSA3" guid="{00000002-E410-4260-88CC-B4B11BF041F5}"/>
+		<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+		<GuestType id="1090721" code="3" name="Интернет заказ" guid="{73C3EBD4-858A-46A2-9FC6-58E591E900A5}"/>
+		<ExternalProps>
+			<Prop name="{79D8D0EC-1DE1-4F21-9105-388384215A90}" value="190cc89af297b8315b9"/>
+			<Prop name="{A598C6FD-E347-414C-8E40-E5B846973ACF}" value="+77331122333"/>
+			<Prop name="{3F2D3287-35FD-407C-AE39-BF8155A67660}" value="TEST"/>
+			<Prop name="{53675C7A-981A-43BA-B022-60860143E208}" value="+77331122333"/>
+			<Prop name="{DF77A2D3-405D-4A5D-B8B6-4150533A2F1D}" value="ae2cb7e6-19c6-43be-b485-f4d6badc4f10"/>
+			<Prop name="{B84CB355-4E2E-4B42-A0AC-367329DA13BF}" value=""/>
+			<Prop name="{E22A6905-676E-4D8D-8E6E-FAB1B8F418EC}" value="cb-app-190"/>
+			<Prop name="42" value=""/>
+			<Prop name="{7DC7AF79-1D00-4573-BE8A-A02C6FA3B430}" value="A69"/>
+		</ExternalProps>
+	</Order>
+	<Session uni="1" line_guid="{0B2CCEE4-7213-4B1E-9501-FFB511A3F78A}" state="4" sessionID="1" isDraft="0" remindTime="2025-12-23T17:36:13" startService="2025-12-23T17:36:13" readyTime="2025-12-15T16:35:25" printed="1" cookMins="5">
+		<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+		<Author id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Author>
+		<Creator id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Creator>
+		<Dish id="1270142" code="1001656" name="Вода 0,5 (пластик) с газом" guid="{37A843E6-052A-4F53-9E7F-72AF74F7909A}" uni="2" line_guid="{19230AED-C905-43BF-AE4F-643DD20AE7D4}" state="4" price="55000" priceListAmount="55000" amount="40000" kdsstate="ready" sortOrder="0" quantity="1000" srcQuantity="1000"/>
+		<Discount id="1268651" code="1000437" name="Yandex Promo *" guid="{5F472EB5-709D-4BB1-BB7F-B7F0588FB8D2}" uni="3" line_guid="{D04F1E74-64C2-402C-BDB5-CDC16096BA37}" state="4" amount="-15000" discountSum="-15000" charge_source="xmlInterface"/>
+		<PriceScale id="1086962" code="122" name="ТРЦ" guid="{6F184E7C-51DF-4D2E-A482-9531DFC564DA}"/>
+		<TradeGroup id="7" code="1" name="По-умолчанию" guid="{C760850F-8955-42A8-AE47-A8714EE9FFC8}"/>
+	</Session>
+	<Session uni="201" line_guid="{89DCA0F7-4CDE-456E-B793-47DAB4D79B7C}" state="1" sessionID="201" isDraft="0" remindTime="2025-12-23T17:47:00" startService="2025-12-23T17:47:11" printed="0" cookMins="0">
+		<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+		<Author id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+			<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+		</Author>
+		<Creator id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+			<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+		</Creator>
+		<PriceScale id="1086962" code="122" name="ТРЦ" guid="{6F184E7C-51DF-4D2E-A482-9531DFC564DA}"/>
+		<TradeGroup id="7" code="1" name="По-умолчанию" guid="{C760850F-8955-42A8-AE47-A8714EE9FFC8}"/>
+	</Session>
+	<Item/>
+	<ChangeLog>
+		<Item number="1" changed="1">
+			<Oper id="416" name="Закрыть заказ с сохранением" guid="{4535D45E-5510-41A6-938B-CA6AF5C6657F}"/>
+		</Item>
+	</ChangeLog>
+</a>
+23.12.2025 17:47:20:519 XML: OnReceiveXml -> corrected:
+<?xml version="1.0" encoding="utf-8"?>
+<a RestCode="245920100" DateTime="2025-12-23T17:47:20" Situation="13" seqnumber="17" guid="{9D1EC578-606D-4248-8281-AFBCE6B16B36}" name="Save Order" sender_info="rk7" ShiftNum="85" ShiftDate="2025-12-23T00:00:00">
+	<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}" NetName="DEVCASH001"/>
+	<Server id="15963" code="15963" name="DEVSERVER" guid="{3FAA0AE2-583B-4C12-9F3F-AABED8F6D694}" NetName="DEVSERVER"/>
+	<Waiter id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+		<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+	</Waiter>
+	<Order visit="621807431" orderIdent="256" guid="{39EAF303-54B2-4057-8BBF-25317D5A61B1}" url="http://code.ucs.ru/qr?id=3FAA0AE2583B4C129F3FAABED8F6D69439EAF30354B240578BBF25317D5A61B16D5378B0" orderName="WSA3" locked="1" version="2" crc32="0" orderSum="40000" unpaidSum="40000" discountSum="-15000" totalPieces="1000" seqNumber="1" paid="0" finished="0" persistentComment="НЕ ГОТОВИТЬ ЭТОТ ЗАКАЗ" nonPersistentComment="" openTime="2025-12-23T17:36:10" kdsstate="ready">
+		<Creator id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Creator>
+		<Waiter id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+			<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+		</Waiter>
+		<OrderCategory id="1172070" code="101" name="Отдел разработок" guid="{B094E7D4-C766-4D4F-BA20-C5AE7B2384BA}"/>
+		<OrderType id="1016010" code="3" name="Доставка" guid="{E0592178-9EEC-40C7-9731-7D367327AF58}"/>
+		<Table id="1210729" code="2505" name="WSA3" guid="{00000002-E410-4260-88CC-B4B11BF041F5}"/>
+		<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+		<GuestType id="1090721" code="3" name="Интернет заказ" guid="{73C3EBD4-858A-46A2-9FC6-58E591E900A5}"/>
+		<ExternalProps>
+			<Prop name="{79D8D0EC-1DE1-4F21-9105-388384215A90}" value="190cc89af297b8315b9"/>
+			<Prop name="{A598C6FD-E347-414C-8E40-E5B846973ACF}" value="+77331122333"/>
+			<Prop name="{3F2D3287-35FD-407C-AE39-BF8155A67660}" value="TEST"/>
+			<Prop name="{53675C7A-981A-43BA-B022-60860143E208}" value="+77331122333"/>
+			<Prop name="{DF77A2D3-405D-4A5D-B8B6-4150533A2F1D}" value="ae2cb7e6-19c6-43be-b485-f4d6badc4f10"/>
+			<Prop name="{B84CB355-4E2E-4B42-A0AC-367329DA13BF}" value=""/>
+			<Prop name="{E22A6905-676E-4D8D-8E6E-FAB1B8F418EC}" value="cb-app-190"/>
+			<Prop name="42" value=""/>
+			<Prop name="{7DC7AF79-1D00-4573-BE8A-A02C6FA3B430}" value="A69"/>
+		</ExternalProps>
+		<Session uni="201" line_guid="{89DCA0F7-4CDE-456E-B793-47DAB4D79B7C}" state="1" sessionID="201" isDraft="0" remindTime="2025-12-23T17:47:00" startService="2025-12-23T17:47:11" printed="0" cookMins="0">
+			<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+			<Author id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+				<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+			</Author>
+			<Creator id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+				<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+			</Creator>
+			<PriceScale id="1086962" code="122" name="ТРЦ" guid="{6F184E7C-51DF-4D2E-A482-9531DFC564DA}"/>
+			<TradeGroup id="7" code="1" name="По-умолчанию" guid="{C760850F-8955-42A8-AE47-A8714EE9FFC8}"/>
+		</Session>
+		<Session uni="1" line_guid="{0B2CCEE4-7213-4B1E-9501-FFB511A3F78A}" state="4" sessionID="1" isDraft="0" remindTime="2025-12-23T17:36:13" startService="2025-12-23T17:36:13" readyTime="2025-12-15T16:35:25" printed="1" cookMins="5">
+			<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+			<Author id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+				<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+			</Author>
+			<Creator id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+				<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+			</Creator>
+			<Dish id="1270142" code="1001656" name="Вода 0,5 (пластик) с газом" guid="{37A843E6-052A-4F53-9E7F-72AF74F7909A}" uni="2" line_guid="{19230AED-C905-43BF-AE4F-643DD20AE7D4}" state="4" price="55000" priceListAmount="55000" amount="40000" kdsstate="ready" sortOrder="0" quantity="1000" srcQuantity="1000"/>
+			<Discount id="1268651" code="1000437" name="Yandex Promo *" guid="{5F472EB5-709D-4BB1-BB7F-B7F0588FB8D2}" uni="3" line_guid="{D04F1E74-64C2-402C-BDB5-CDC16096BA37}" state="4" amount="-15000" discountSum="-15000" charge_source="xmlInterface"/>
+			<PriceScale id="1086962" code="122" name="ТРЦ" guid="{6F184E7C-51DF-4D2E-A482-9531DFC564DA}"/>
+			<TradeGroup id="7" code="1" name="По-умолчанию" guid="{C760850F-8955-42A8-AE47-A8714EE9FFC8}"/>
+		</Session>
+	</Order>
+	<Session uni="1" line_guid="{0B2CCEE4-7213-4B1E-9501-FFB511A3F78A}" state="4" sessionID="1" isDraft="0" remindTime="2025-12-23T17:36:13" startService="2025-12-23T17:36:13" readyTime="2025-12-15T16:35:25" printed="1" cookMins="5">
+		<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+		<Author id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Author>
+		<Creator id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Creator>
+		<Dish id="1270142" code="1001656" name="Вода 0,5 (пластик) с газом" guid="{37A843E6-052A-4F53-9E7F-72AF74F7909A}" uni="2" line_guid="{19230AED-C905-43BF-AE4F-643DD20AE7D4}" state="4" price="55000" priceListAmount="55000" amount="40000" kdsstate="ready" sortOrder="0" quantity="1000" srcQuantity="1000"/>
+		<Discount id="1268651" code="1000437" name="Yandex Promo *" guid="{5F472EB5-709D-4BB1-BB7F-B7F0588FB8D2}" uni="3" line_guid="{D04F1E74-64C2-402C-BDB5-CDC16096BA37}" state="4" amount="-15000" discountSum="-15000" charge_source="xmlInterface"/>
+		<PriceScale id="1086962" code="122" name="ТРЦ" guid="{6F184E7C-51DF-4D2E-A482-9531DFC564DA}"/>
+		<TradeGroup id="7" code="1" name="По-умолчанию" guid="{C760850F-8955-42A8-AE47-A8714EE9FFC8}"/>
+	</Session>
+	<Session uni="201" line_guid="{89DCA0F7-4CDE-456E-B793-47DAB4D79B7C}" state="1" sessionID="201" isDraft="0" remindTime="2025-12-23T17:47:00" startService="2025-12-23T17:47:11" printed="0" cookMins="0">
+		<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+		<Author id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+			<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+		</Author>
+		<Creator id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+			<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+		</Creator>
+		<PriceScale id="1086962" code="122" name="ТРЦ" guid="{6F184E7C-51DF-4D2E-A482-9531DFC564DA}"/>
+		<TradeGroup id="7" code="1" name="По-умолчанию" guid="{C760850F-8955-42A8-AE47-A8714EE9FFC8}"/>
+	</Session>
+	<Item/>
+	<ChangeLog>
+		<Item number="1" changed="1">
+			<Oper id="416" name="Закрыть заказ с сохранением" guid="{4535D45E-5510-41A6-938B-CA6AF5C6657F}"/>
+		</Item>
+	</ChangeLog>
+</a>
+23.12.2025 17:47:20:519 SEND_THREAD: Signal [Send] ENTER, items in queue: 1
+23.12.2025 17:47:20:519 HTTP: Sending XML on address: http://127.0.0.1:13444/rkevent
+23.12.2025 17:47:20:604 XML: OnReceiveXml:
+<?xml version="1.0" encoding="utf-8"?>
+<a RestCode="245920100" DateTime="2025-12-23T17:47:20" Situation="9" seqnumber="18" guid="{2473F575-BC0D-47EB-AAEA-916F9466ECB4}" name="Quit Order" sender_info="rk7" ShiftNum="85" ShiftDate="2025-12-23T00:00:00">
+	<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}" NetName="DEVCASH001"/>
+	<Server id="15963" code="15963" name="DEVSERVER" guid="{3FAA0AE2-583B-4C12-9F3F-AABED8F6D694}" NetName="DEVSERVER"/>
+	<Waiter id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+		<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+	</Waiter>
+	<Order visit="621807431" orderIdent="256" guid="{39EAF303-54B2-4057-8BBF-25317D5A61B1}" url="http://code.ucs.ru/qr?id=3FAA0AE2583B4C129F3FAABED8F6D69439EAF30354B240578BBF25317D5A61B16D5378B0" orderName="WSA3" locked="1" version="2" crc32="0" orderSum="40000" unpaidSum="40000" discountSum="-15000" totalPieces="1000" seqNumber="1" paid="0" finished="0" persistentComment="НЕ ГОТОВИТЬ ЭТОТ ЗАКАЗ" nonPersistentComment="" openTime="2025-12-23T17:36:10" kdsstate="ready">
+		<Creator id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Creator>
+		<Waiter id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+			<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+		</Waiter>
+		<OrderCategory id="1172070" code="101" name="Отдел разработок" guid="{B094E7D4-C766-4D4F-BA20-C5AE7B2384BA}"/>
+		<OrderType id="1016010" code="3" name="Доставка" guid="{E0592178-9EEC-40C7-9731-7D367327AF58}"/>
+		<Table id="1210729" code="2505" name="WSA3" guid="{00000002-E410-4260-88CC-B4B11BF041F5}"/>
+		<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+		<GuestType id="1090721" code="3" name="Интернет заказ" guid="{73C3EBD4-858A-46A2-9FC6-58E591E900A5}"/>
+		<ExternalProps>
+			<Prop name="{79D8D0EC-1DE1-4F21-9105-388384215A90}" value="190cc89af297b8315b9"/>
+			<Prop name="{A598C6FD-E347-414C-8E40-E5B846973ACF}" value="+77331122333"/>
+			<Prop name="{3F2D3287-35FD-407C-AE39-BF8155A67660}" value="TEST"/>
+			<Prop name="{53675C7A-981A-43BA-B022-60860143E208}" value="+77331122333"/>
+			<Prop name="{DF77A2D3-405D-4A5D-B8B6-4150533A2F1D}" value="ae2cb7e6-19c6-43be-b485-f4d6badc4f10"/>
+			<Prop name="{B84CB355-4E2E-4B42-A0AC-367329DA13BF}" value=""/>
+			<Prop name="{E22A6905-676E-4D8D-8E6E-FAB1B8F418EC}" value="cb-app-190"/>
+			<Prop name="42" value=""/>
+			<Prop name="{7DC7AF79-1D00-4573-BE8A-A02C6FA3B430}" value="A69"/>
+		</ExternalProps>
+	</Order>
+	<Session uni="1" line_guid="{0B2CCEE4-7213-4B1E-9501-FFB511A3F78A}" state="4" sessionID="1" isDraft="0" remindTime="2025-12-23T17:36:13" startService="2025-12-23T17:36:13" readyTime="2025-12-15T16:35:25" printed="1" cookMins="5">
+		<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+		<Author id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Author>
+		<Creator id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Creator>
+		<Dish id="1270142" code="1001656" name="Вода 0,5 (пластик) с газом" guid="{37A843E6-052A-4F53-9E7F-72AF74F7909A}" uni="2" line_guid="{19230AED-C905-43BF-AE4F-643DD20AE7D4}" state="4" price="55000" priceListAmount="55000" amount="40000" kdsstate="ready" sortOrder="0" quantity="1000" srcQuantity="1000"/>
+		<Discount id="1268651" code="1000437" name="Yandex Promo *" guid="{5F472EB5-709D-4BB1-BB7F-B7F0588FB8D2}" uni="3" line_guid="{D04F1E74-64C2-402C-BDB5-CDC16096BA37}" state="4" amount="-15000" discountSum="-15000" charge_source="xmlInterface"/>
+		<PriceScale id="1086962" code="122" name="ТРЦ" guid="{6F184E7C-51DF-4D2E-A482-9531DFC564DA}"/>
+		<TradeGroup id="7" code="1" name="По-умолчанию" guid="{C760850F-8955-42A8-AE47-A8714EE9FFC8}"/>
+	</Session>
+	<Session uni="201" line_guid="{89DCA0F7-4CDE-456E-B793-47DAB4D79B7C}" state="1" sessionID="201" isDraft="0" remindTime="2025-12-23T17:47:00" startService="2025-12-23T17:47:11" printed="0" cookMins="0">
+		<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+		<Author id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+			<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+		</Author>
+		<Creator id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+			<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+		</Creator>
+		<PriceScale id="1086962" code="122" name="ТРЦ" guid="{6F184E7C-51DF-4D2E-A482-9531DFC564DA}"/>
+		<TradeGroup id="7" code="1" name="По-умолчанию" guid="{C760850F-8955-42A8-AE47-A8714EE9FFC8}"/>
+	</Session>
+	<Item ClassName="TOrder"/>
+	<ChangeLog>
+		<Item number="1" changed="1">
+			<Oper id="416" name="Закрыть заказ с сохранением" guid="{4535D45E-5510-41A6-938B-CA6AF5C6657F}"/>
+		</Item>
+	</ChangeLog>
+</a>
+23.12.2025 17:47:20:605 XML: OnReceiveXml -> corrected:
+<?xml version="1.0" encoding="utf-8"?>
+<a RestCode="245920100" DateTime="2025-12-23T17:47:20" Situation="9" seqnumber="18" guid="{2473F575-BC0D-47EB-AAEA-916F9466ECB4}" name="Quit Order" sender_info="rk7" ShiftNum="85" ShiftDate="2025-12-23T00:00:00">
+	<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}" NetName="DEVCASH001"/>
+	<Server id="15963" code="15963" name="DEVSERVER" guid="{3FAA0AE2-583B-4C12-9F3F-AABED8F6D694}" NetName="DEVSERVER"/>
+	<Waiter id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+		<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+	</Waiter>
+	<Order visit="621807431" orderIdent="256" guid="{39EAF303-54B2-4057-8BBF-25317D5A61B1}" url="http://code.ucs.ru/qr?id=3FAA0AE2583B4C129F3FAABED8F6D69439EAF30354B240578BBF25317D5A61B16D5378B0" orderName="WSA3" locked="1" version="2" crc32="0" orderSum="40000" unpaidSum="40000" discountSum="-15000" totalPieces="1000" seqNumber="1" paid="0" finished="0" persistentComment="НЕ ГОТОВИТЬ ЭТОТ ЗАКАЗ" nonPersistentComment="" openTime="2025-12-23T17:36:10" kdsstate="ready">
+		<Creator id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Creator>
+		<Waiter id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+			<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+		</Waiter>
+		<OrderCategory id="1172070" code="101" name="Отдел разработок" guid="{B094E7D4-C766-4D4F-BA20-C5AE7B2384BA}"/>
+		<OrderType id="1016010" code="3" name="Доставка" guid="{E0592178-9EEC-40C7-9731-7D367327AF58}"/>
+		<Table id="1210729" code="2505" name="WSA3" guid="{00000002-E410-4260-88CC-B4B11BF041F5}"/>
+		<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+		<GuestType id="1090721" code="3" name="Интернет заказ" guid="{73C3EBD4-858A-46A2-9FC6-58E591E900A5}"/>
+		<ExternalProps>
+			<Prop name="{79D8D0EC-1DE1-4F21-9105-388384215A90}" value="190cc89af297b8315b9"/>
+			<Prop name="{A598C6FD-E347-414C-8E40-E5B846973ACF}" value="+77331122333"/>
+			<Prop name="{3F2D3287-35FD-407C-AE39-BF8155A67660}" value="TEST"/>
+			<Prop name="{53675C7A-981A-43BA-B022-60860143E208}" value="+77331122333"/>
+			<Prop name="{DF77A2D3-405D-4A5D-B8B6-4150533A2F1D}" value="ae2cb7e6-19c6-43be-b485-f4d6badc4f10"/>
+			<Prop name="{B84CB355-4E2E-4B42-A0AC-367329DA13BF}" value=""/>
+			<Prop name="{E22A6905-676E-4D8D-8E6E-FAB1B8F418EC}" value="cb-app-190"/>
+			<Prop name="42" value=""/>
+			<Prop name="{7DC7AF79-1D00-4573-BE8A-A02C6FA3B430}" value="A69"/>
+		</ExternalProps>
+		<Session uni="201" line_guid="{89DCA0F7-4CDE-456E-B793-47DAB4D79B7C}" state="1" sessionID="201" isDraft="0" remindTime="2025-12-23T17:47:00" startService="2025-12-23T17:47:11" printed="0" cookMins="0">
+			<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+			<Author id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+				<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+			</Author>
+			<Creator id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+				<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+			</Creator>
+			<PriceScale id="1086962" code="122" name="ТРЦ" guid="{6F184E7C-51DF-4D2E-A482-9531DFC564DA}"/>
+			<TradeGroup id="7" code="1" name="По-умолчанию" guid="{C760850F-8955-42A8-AE47-A8714EE9FFC8}"/>
+		</Session>
+		<Session uni="1" line_guid="{0B2CCEE4-7213-4B1E-9501-FFB511A3F78A}" state="4" sessionID="1" isDraft="0" remindTime="2025-12-23T17:36:13" startService="2025-12-23T17:36:13" readyTime="2025-12-15T16:35:25" printed="1" cookMins="5">
+			<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+			<Author id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+				<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+			</Author>
+			<Creator id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+				<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+			</Creator>
+			<Dish id="1270142" code="1001656" name="Вода 0,5 (пластик) с газом" guid="{37A843E6-052A-4F53-9E7F-72AF74F7909A}" uni="2" line_guid="{19230AED-C905-43BF-AE4F-643DD20AE7D4}" state="4" price="55000" priceListAmount="55000" amount="40000" kdsstate="ready" sortOrder="0" quantity="1000" srcQuantity="1000"/>
+			<Discount id="1268651" code="1000437" name="Yandex Promo *" guid="{5F472EB5-709D-4BB1-BB7F-B7F0588FB8D2}" uni="3" line_guid="{D04F1E74-64C2-402C-BDB5-CDC16096BA37}" state="4" amount="-15000" discountSum="-15000" charge_source="xmlInterface"/>
+			<PriceScale id="1086962" code="122" name="ТРЦ" guid="{6F184E7C-51DF-4D2E-A482-9531DFC564DA}"/>
+			<TradeGroup id="7" code="1" name="По-умолчанию" guid="{C760850F-8955-42A8-AE47-A8714EE9FFC8}"/>
+		</Session>
+	</Order>
+	<Session uni="1" line_guid="{0B2CCEE4-7213-4B1E-9501-FFB511A3F78A}" state="4" sessionID="1" isDraft="0" remindTime="2025-12-23T17:36:13" startService="2025-12-23T17:36:13" readyTime="2025-12-15T16:35:25" printed="1" cookMins="5">
+		<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+		<Author id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Author>
+		<Creator id="9001" code="9001" name="Система" guid="{1FDE5724-5E09-49E5-95D2-9ADABAA3FB74}">
+			<Role id="100010" code="100010" name="Системная" guid="{2BF88B7C-DE0F-48B8-8A56-84B4C76A7D5E}"/>
+		</Creator>
+		<Dish id="1270142" code="1001656" name="Вода 0,5 (пластик) с газом" guid="{37A843E6-052A-4F53-9E7F-72AF74F7909A}" uni="2" line_guid="{19230AED-C905-43BF-AE4F-643DD20AE7D4}" state="4" price="55000" priceListAmount="55000" amount="40000" kdsstate="ready" sortOrder="0" quantity="1000" srcQuantity="1000"/>
+		<Discount id="1268651" code="1000437" name="Yandex Promo *" guid="{5F472EB5-709D-4BB1-BB7F-B7F0588FB8D2}" uni="3" line_guid="{D04F1E74-64C2-402C-BDB5-CDC16096BA37}" state="4" amount="-15000" discountSum="-15000" charge_source="xmlInterface"/>
+		<PriceScale id="1086962" code="122" name="ТРЦ" guid="{6F184E7C-51DF-4D2E-A482-9531DFC564DA}"/>
+		<TradeGroup id="7" code="1" name="По-умолчанию" guid="{C760850F-8955-42A8-AE47-A8714EE9FFC8}"/>
+	</Session>
+	<Session uni="201" line_guid="{89DCA0F7-4CDE-456E-B793-47DAB4D79B7C}" state="1" sessionID="201" isDraft="0" remindTime="2025-12-23T17:47:00" startService="2025-12-23T17:47:11" printed="0" cookMins="0">
+		<Station id="15632" code="1" name="Касса Dev" guid="{463701CE-AC33-4FC9-828A-00CB781013CE}"/>
+		<Author id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+			<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+		</Author>
+		<Creator id="1013649" code="2789" name="Dev Cashier" guid="{D3663882-2A89-40FA-A319-F181FE9761FA}">
+			<Role id="1172311" code="368" name="Менеджеры ЦОН" guid="{DA958A26-4C92-4BCA-B024-646176E08BEA}"/>
+		</Creator>
+		<PriceScale id="1086962" code="122" name="ТРЦ" guid="{6F184E7C-51DF-4D2E-A482-9531DFC564DA}"/>
+		<TradeGroup id="7" code="1" name="По-умолчанию" guid="{C760850F-8955-42A8-AE47-A8714EE9FFC8}"/>
+	</Session>
+	<Item ClassName="TOrder"/>
+	<ChangeLog>
+		<Item number="1" changed="1">
+			<Oper id="416" name="Закрыть заказ с сохранением" guid="{4535D45E-5510-41A6-938B-CA6AF5C6657F}"/>
+		</Item>
+	</ChangeLog>
+</a>
+23.12.2025 17:47:20:610 XML: OnReceiveXml: Skipped situation "2 - Main Menu"
+23.12.2025 17:47:20:633 XML: OnReceiveXml: Skipped situation "22 - Open window"
+23.12.2025 17:47:20:680 HTTP: Post done
+23.12.2025 17:47:20:680 SEND_THREAD: Signal [Send] LEAVE, items in queue: 1
+23.12.2025 17:47:20:680 SEND_THREAD: Waiting for signals...
+23.12.2025 17:47:20:680 SEND_THREAD: Signal [Send] ENTER, items in queue: 1
+23.12.2025 17:47:20:680 HTTP: Sending XML on address: http://127.0.0.1:13444/rkevent
+23.12.2025 17:47:20:820 HTTP: Post done
+23.12.2025 17:47:20:820 SEND_THREAD: Signal [Send] LEAVE, items in queue: 0
+23.12.2025 17:47:20:820 SEND_THREAD: Waiting for signals...

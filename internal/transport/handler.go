@@ -3,7 +3,7 @@ package transport
 import (
 	"encoding/xml"
 	"io"
-	"log"
+	"log/slog"
 	"net/http"
 
 	"github.com/alexandr-andreyev/soup-rk7-events/internal/models"
@@ -21,7 +21,7 @@ func NewHandler(notifySvc services.NotifyEventService) *Handler {
 }
 
 func (h *Handler) HandleEvents(w http.ResponseWriter, r *http.Request) {
-	log.Println("Received event")
+	slog.Info("Received event")
 
 	// Читаем тело запроса
 	body, err := io.ReadAll(r.Body)
@@ -31,7 +31,7 @@ func (h *Handler) HandleEvents(w http.ResponseWriter, r *http.Request) {
 	}
 	defer r.Body.Close()
 
-	//log.Println("Request Body:", string(body))
+	//slog.Info("Request Body", "body", string(body))
 
 	var rk7NotifyEvent models.Rk7NotifyEvent
 	err = xml.Unmarshal(body, &rk7NotifyEvent)
@@ -45,6 +45,6 @@ func (h *Handler) HandleEvents(w http.ResponseWriter, r *http.Request) {
 
 	// Обрабатываем уведомление синхронно для сохранения порядка событий
 	if err := h.NotifyService.HandleNotification(&rk7NotifyEvent); err != nil {
-		log.Printf("Error handling notification: %v", err)
+		slog.Error("Error handling notification", "error", err)
 	}
 }

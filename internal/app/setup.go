@@ -1,13 +1,14 @@
 package app
 
 import (
-	"log"
+	"log/slog"
 	"net/http"
 	"time"
 
 	"github.com/alexandr-andreyev/soup-rk7-events/internal/client"
 	"github.com/alexandr-andreyev/soup-rk7-events/internal/config"
 	"github.com/alexandr-andreyev/soup-rk7-events/internal/database"
+	"github.com/alexandr-andreyev/soup-rk7-events/internal/logger"
 	"github.com/alexandr-andreyev/soup-rk7-events/internal/services"
 	"github.com/alexandr-andreyev/soup-rk7-events/internal/transport"
 )
@@ -28,7 +29,7 @@ func setup(svcName, sha1ver string) (server, error) {
 	// Load configuration
 	cfg, err := config.Load("config.yaml")
 	if err != nil {
-		log.Printf("Failed to load config: %v, using defaults", err)
+		slog.Warn("Failed to load config, using defaults", "error", err)
 		// Use default config
 		cfg = &config.Config{
 			Server: config.ServerConfig{
@@ -45,13 +46,22 @@ func setup(svcName, sha1ver string) (server, error) {
 			Database: config.DatabaseConfig{
 				Path: "orders.db",
 			},
+			Logging: config.LoggingConfig{
+				Directory: "logs",
+			},
 		}
+	}
+
+	// Initialize file logging
+	if err := logger.InitFileLogger(cfg.Logging.Directory); err != nil {
+		slog.Warn("Failed to initialize file logging", "error", err)
+		// Continue without file logging
 	}
 
 	// Initialize database
 	db, err := database.InitDB(cfg.Database.Path)
 	if err != nil {
-		log.Printf("Failed to initialize database: %v", err)
+		slog.Error("Failed to initialize database", "error", err)
 		return s, err
 	}
 
