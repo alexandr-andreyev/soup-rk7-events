@@ -27,8 +27,22 @@ func NewExternalClient(cfg *config.ExternalConfig) *ExternalClient {
 	}
 }
 
+// White Server отправляет события при помощи Post-запросов:
+
+// Body — в виде json запроса
+// Headers — здесь добавлено поле Signature для проверки хэш кода содержимого body, удостоверяющее отправителя.
+
+// Пример Headers:
+
+// {
+// "content-length":"1140",
+// "signature":"+sMQMDTMoeE82ONz5ZR03ocQ+TSihyCGCW2Immrlwps=",
+// "content-type":"application/json; charset=utf-8"
+// }
+
 // SendEvent sends an event to the external API with retry logic
 func (c *ExternalClient) SendEvent(event *models.ExternalEvent) error {
+
 	jsonData, err := json.Marshal(event)
 	if err != nil {
 		return fmt.Errorf("failed to marshal event: %w", err)
@@ -47,7 +61,12 @@ func (c *ExternalClient) SendEvent(event *models.ExternalEvent) error {
 			continue
 		}
 
+		// headers
 		req.Header.Set("Content-Type", "application/json")
+
+		// signature
+		signature := c.GenerateHash(jsonData)
+		req.Header.Set("Signature", signature)
 
 		resp, err := c.httpClient.Do(req)
 		if err != nil {
@@ -60,9 +79,13 @@ func (c *ExternalClient) SendEvent(event *models.ExternalEvent) error {
 		body, _ := io.ReadAll(resp.Body)
 		resp.Body.Close()
 
+		slog.Info("Sending event",
+			"guid", event.ResponseEventCommon.EventGUID,
+			"event", string(jsonData))
 		// Check if request was successful
 		if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 			slog.Info("Event sent successfully", "guid", event.ResponseEventCommon.EventGUID, "status", resp.StatusCode)
+
 			return nil
 		}
 

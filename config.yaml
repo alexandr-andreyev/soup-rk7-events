@@ -9,7 +9,7 @@ server:
 
 external:
   # External API URL to forward events to
-  url: "https://my.local/events"
+  url: "http://localhost:9081/api/v1/events/wsa"
 
   # HTTP client timeout in seconds
   timeout_seconds: 10

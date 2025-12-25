@@ -1,6 +1,7 @@
 package models
 
 import (
+	"strconv"
 	"time"
 
 	"github.com/google/uuid"
@@ -13,7 +14,7 @@ type ExternalEvent struct {
 }
 
 type ResponseEventCommon struct {
-	ObjectID                            string `json:"objectId"`
+	ObjectID                            int    `json:"objectId"`
 	AgentGUID                           string `json:"agentGuid"`
 	EventGUID                           string `json:"eventGuid"`
 	DateTimeServerReceiveEventFromAgent string `json:"dateTimeServerReceiveEventFromAgent"`
@@ -40,9 +41,14 @@ type RejectingReason struct {
 
 // ToExternalEvent converts RK7 notification to external event format
 func (rk7 *Rk7NotifyEvent) ToExternalEvent() *ExternalEvent {
+	objectId, err := strconv.Atoi(rk7.RestCode)
+	if err != nil {
+		objectId = 0
+	}
+
 	event := &ExternalEvent{
 		ResponseEventCommon: ResponseEventCommon{
-			ObjectID:                            rk7.RestCode,
+			ObjectID:                            objectId,
 			AgentGUID:                           rk7.RestCode + "-agent",
 			EventGUID:                           uuid.New().String(),
 			DateTimeServerReceiveEventFromAgent: time.Now().Format(time.RFC3339),

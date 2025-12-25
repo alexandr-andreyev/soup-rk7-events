@@ -21,6 +21,7 @@ type ServerConfig struct {
 }
 
 type ExternalConfig struct {
+	WSASalt        string `yaml:"wsa_salt"`
 	URL            string `yaml:"url"`
 	TimeoutSeconds int    `yaml:"timeout_seconds"`
 	MaxRetries     int    `yaml:"max_retries"`
@@ -64,6 +65,10 @@ func Load(path string) (*Config, error) {
 	}
 	if cfg.External.RetryDelay == 0 {
 		cfg.External.RetryDelay = 1
+	}
+
+	if cfg.External.WSASalt == "" {
+		cfg.External.WSASalt = "19eb62c0-42bb-413c-8e14-298ca54fdb6d"
 	}
 	if cfg.Database.Path == "" {
 		cfg.Database.Path = "orders.db"
