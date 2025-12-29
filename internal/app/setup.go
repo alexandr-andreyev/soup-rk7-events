@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/alexandr-andreyev/soup-rk7-events/internal/client"
 	"github.com/alexandr-andreyev/soup-rk7-events/internal/config"
 	"github.com/alexandr-andreyev/soup-rk7-events/internal/database"
 	"github.com/alexandr-andreyev/soup-rk7-events/internal/logger"
@@ -37,12 +36,7 @@ func setup(svcName, sha1ver string) (server, error) {
 				ReadTimeout:  10,
 				WriteTimeout: 10,
 			},
-			External: config.ExternalConfig{
-				URL:            "",
-				TimeoutSeconds: 10,
-				MaxRetries:     3,
-				RetryDelay:     1,
-			},
+			Subscribers: []config.Subscriber{},
 			Database: config.DatabaseConfig{
 				Path: "orders.db",
 			},
@@ -68,12 +62,12 @@ func setup(svcName, sha1ver string) (server, error) {
 	// Create repository
 	orderRepo := database.NewOrderStateRepository(db)
 
-	// Create external client
-	externalClient := client.NewExternalClient(&cfg.External)
+	// Create event dispatcher with subscribers from config
+	dispatcher := services.NewEventDispatcher(cfg)
 
-	// Create service with external client and repository
+	// Create service with dispatcher and repository
 	handleEventService := services.NewRkNotifyHandleService(
-		externalClient,
+		dispatcher,
 		orderRepo,
 	)
 	s.httpServer = setupHttpServer(handleEventService, cfg)

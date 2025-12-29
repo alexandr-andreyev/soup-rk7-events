@@ -7,18 +7,38 @@ server:
   read_timeout: 10
   write_timeout: 10
 
-external:
-  # External API URL to forward events to
-  url: "http://localhost:9081/api/v1/events/wsa"
-
-  # HTTP client timeout in seconds
-  timeout_seconds: 10
-
-  # Number of retry attempts on failure
-  max_retries: 3
-
-  # Delay between retries in seconds
-  retry_delay_seconds: 1
+subscribers:
+  - name: "Service1"
+    url: "http://localhost:8001/webhook"
+    enabled: true
+    # HTTP client timeout in seconds
+    timeout: 5
+    # Number of retry attempts on failure
+    retry_count: 3
+    # Delay between retries in seconds
+    retry_delay_seconds: 1
+    table_codes:
+      - 9911
+      - 9922
+    event_types:
+    # events from Rk7Notify WSA
+      - "OrderChanged"
+      - "OrderStatusChanged"
+      - "StopListChanged"
+    
+  - name: "Service2"
+    url: "https://api.example.com/callback"
+    enabled: true
+    event_types:
+      - "order.*"  # все события заказов
+      - "payment.*"
+    headers:
+      Authorization: "Bearer token123"
+      
+  - name: "Service3"
+    url: "https://api.example.com/all"
+    enabled: true
+    # без event_types = получает все события
 
 database:
   # SQLite database file path for order state tracking

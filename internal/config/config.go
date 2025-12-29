@@ -8,10 +8,10 @@ import (
 )
 
 type Config struct {
-	Server   ServerConfig   `yaml:"server"`
-	External ExternalConfig `yaml:"external"`
-	Database DatabaseConfig `yaml:"database"`
-	Logging  LoggingConfig  `yaml:"logging"`
+	Server      ServerConfig   `yaml:"server"`
+	Subscribers []Subscriber   `yaml:"subscribers"`
+	Database    DatabaseConfig `yaml:"database"`
+	Logging     LoggingConfig  `yaml:"logging"`
 }
 
 type ServerConfig struct {
@@ -20,12 +20,16 @@ type ServerConfig struct {
 	WriteTimeout int    `yaml:"write_timeout"`
 }
 
-type ExternalConfig struct {
-	WSASalt        string `yaml:"wsa_salt"`
-	URL            string `yaml:"url"`
-	TimeoutSeconds int    `yaml:"timeout_seconds"`
-	MaxRetries     int    `yaml:"max_retries"`
-	RetryDelay     int    `yaml:"retry_delay_seconds"`
+type Subscriber struct {
+	Name               string            `yaml:"name"`
+	URL                string            `yaml:"url"`
+	Enabled            bool              `yaml:"enabled"`
+	Timeout            int               `yaml:"timeout"`
+	RetryCount         int               `yaml:"retry_count"`
+	RetryDelaySeconds  int               `yaml:"retry_delay_seconds"`
+	TableCodes         []int             `yaml:"table_codes"`
+	EventTypes         []string          `yaml:"event_types"`
+	Headers            map[string]string `yaml:"headers"`
 }
 
 type DatabaseConfig struct {
@@ -57,19 +61,20 @@ func Load(path string) (*Config, error) {
 	if cfg.Server.WriteTimeout == 0 {
 		cfg.Server.WriteTimeout = 10
 	}
-	if cfg.External.TimeoutSeconds == 0 {
-		cfg.External.TimeoutSeconds = 10
-	}
-	if cfg.External.MaxRetries == 0 {
-		cfg.External.MaxRetries = 3
-	}
-	if cfg.External.RetryDelay == 0 {
-		cfg.External.RetryDelay = 1
+
+	// Set defaults for subscribers
+	for i := range cfg.Subscribers {
+		if cfg.Subscribers[i].Timeout == 0 {
+			cfg.Subscribers[i].Timeout = 5
+		}
+		if cfg.Subscribers[i].RetryCount == 0 {
+			cfg.Subscribers[i].RetryCount = 3
+		}
+		if cfg.Subscribers[i].RetryDelaySeconds == 0 {
+			cfg.Subscribers[i].RetryDelaySeconds = 1
+		}
 	}
 
-	if cfg.External.WSASalt == "" {
-		cfg.External.WSASalt = "19eb62c0-42bb-413c-8e14-298ca54fdb6d"
-	}
 	if cfg.Database.Path == "" {
 		cfg.Database.Path = "orders.db"
 	}

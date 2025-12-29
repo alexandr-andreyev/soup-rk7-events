@@ -178,8 +178,10 @@ func TestHandleEvents_InvalidXML(t *testing.T) {
 func TestHandleEvents_ServiceError(t *testing.T) {
 	// Arrange
 	expectedError := errors.New("service processing failed")
+	serviceCalled := false
 	mockService := &MockNotifyService{
 		handleFunc: func(data *models.Rk7NotifyEvent) error {
+			serviceCalled = true
 			return expectedError
 		},
 	}
@@ -194,12 +196,15 @@ func TestHandleEvents_ServiceError(t *testing.T) {
 	handler.HandleEvents(rec, req)
 
 	// Assert
-	if rec.Code != http.StatusInternalServerError {
-		t.Errorf("Expected status %d when service fails, got %d", http.StatusInternalServerError, rec.Code)
+	// Handler returns 200 OK immediately after parsing XML to acknowledge receipt
+	// This prevents RK7 from retrying the event
+	if rec.Code != http.StatusOK {
+		t.Errorf("Expected status %d (handler acknowledges immediately), got %d", http.StatusOK, rec.Code)
 	}
 
-	if !bytes.Contains(rec.Body.Bytes(), []byte("Failed to handle notification")) {
-		t.Errorf("Expected 'Failed to handle notification' in response body, got: %s", rec.Body.String())
+	// Verify the service was called (error is logged, not returned to client)
+	if !serviceCalled {
+		t.Error("Expected service to be called despite error")
 	}
 }
 

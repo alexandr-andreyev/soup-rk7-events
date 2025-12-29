@@ -3,7 +3,6 @@ package services
 import (
 	"log/slog"
 
-	"github.com/alexandr-andreyev/soup-rk7-events/internal/client"
 	"github.com/alexandr-andreyev/soup-rk7-events/internal/database"
 	"github.com/alexandr-andreyev/soup-rk7-events/internal/models"
 	"gorm.io/gorm"
@@ -14,20 +13,22 @@ type NotifyEventService interface {
 }
 
 type RkNotifyHandleService struct {
-	externalClient *client.ExternalClient
-	orderRepo      *database.OrderStateRepository
+	dispatcher *EventDispatcher
+	orderRepo  *database.OrderStateRepository
 }
 
-func NewRkNotifyHandleService(externalClient *client.ExternalClient, orderRepo *database.OrderStateRepository) *RkNotifyHandleService {
+func NewRkNotifyHandleService(dispatcher *EventDispatcher, orderRepo *database.OrderStateRepository) *RkNotifyHandleService {
 	return &RkNotifyHandleService{
-		externalClient: externalClient,
-		orderRepo:      orderRepo,
+		dispatcher: dispatcher,
+		orderRepo:  orderRepo,
 	}
 }
 
 func (s *RkNotifyHandleService) HandleNotification(data *models.Rk7NotifyEvent) error {
 	// Log received event
 	slog.Info("Received event", "name", data.Name, "guid", data.GUID)
+
+	// check subscribers exist
 
 	// Process event based on type
 	switch data.Name {
@@ -76,6 +77,7 @@ func (s *RkNotifyHandleService) handleOrderStatusChange(data *models.Rk7NotifyEv
 	// Try to get existing order state from DB
 	existingState, err := s.orderRepo.GetByOrderGuid(orderGUID)
 
+	statusChanged := false
 	if err != nil {
 		// Check if error is "record not found"
 		if err == gorm.ErrRecordNotFound {
@@ -93,43 +95,62 @@ func (s *RkNotifyHandleService) handleOrderStatusChange(data *models.Rk7NotifyEv
 				return err
 			}
 
-			// Send event to external API
-			return s.sendToExternalAPI(data)
+			statusChanged = true
+		} else {
+			// Other database error
+			slog.Error("Database error while getting order state", "error", err)
+			return err
 		}
+	} else {
+		// Order found in DB - check if status changed
+		if existingState.Kdsstate != newStatus {
+			// Status changed - update DB
+			slog.Info("Order status changed", "guid", orderGUID, "oldStatus", existingState.Kdsstate, "newStatus", newStatus)
 
-		// Other database error
-		slog.Error("Database error while getting order state", "error", err)
-		return err
+			if err := s.orderRepo.UpdateStatus(orderGUID, newStatus); err != nil {
+				slog.Error("Failed to update order state in DB", "error", err)
+				return err
+			}
+
+			statusChanged = true
+		} else {
+			slog.Info("Order status unchanged", "guid", orderGUID, "status", newStatus)
+		}
 	}
 
-	// Order found in DB - check if status changed
-	if existingState.Kdsstate == newStatus {
-		slog.Info("Order status unchanged, ignoring event", "guid", orderGUID, "status", newStatus)
-		return nil
+	// Dispatch events based on what changed
+	var dispatchErrors []error
+
+	// 1. If status changed, dispatch OrderStatusChanged event
+	if statusChanged {
+		if err := s.dispatcher.Dispatch(data, "OrderStatusChanged"); err != nil {
+			slog.Error("Failed to dispatch OrderStatusChanged event", "error", err)
+			dispatchErrors = append(dispatchErrors, err)
+		}
 	}
 
-	// Status changed - update DB and send event
-	slog.Info("Order status changed", "guid", orderGUID, "oldStatus", existingState.Kdsstate, "newStatus", newStatus)
-
-	if err := s.orderRepo.UpdateStatus(orderGUID, newStatus); err != nil {
-		slog.Error("Failed to update order state in DB", "error", err)
-		return err
+	// 2. Always dispatch OrderChanged event (content may have changed)
+	// Subscribers can filter whether they want this event type
+	if err := s.dispatcher.Dispatch(data, "OrderChanged"); err != nil {
+		slog.Error("Failed to dispatch OrderChanged event", "error", err)
+		dispatchErrors = append(dispatchErrors, err)
 	}
 
-	// Send event to external API
-	return s.sendToExternalAPI(data)
+	// Return first error if any occurred
+	if len(dispatchErrors) > 0 {
+		return dispatchErrors[0]
+	}
+
+	return nil
 }
 
 func (s *RkNotifyHandleService) sendToExternalAPI(data *models.Rk7NotifyEvent) error {
-	// Convert to external event format
-	externalEvent := data.ToExternalEvent()
-
-	// Send to external API
-	if err := s.externalClient.SendEvent(externalEvent); err != nil {
-		slog.Error("Failed to send event to external API", "error", err)
+	// Dispatch to all matching subscribers (uses default event.Name for matching)
+	if err := s.dispatcher.Dispatch(data, ""); err != nil {
+		slog.Error("Failed to dispatch event", "error", err)
 		return err
 	}
 
-	slog.Info("Event forwarded successfully", "guid", externalEvent.ResponseEventCommon.EventGUID)
+	slog.Info("Event dispatched successfully", "guid", data.GUID)
 	return nil
 }
