@@ -17,6 +17,7 @@ subscribers:
     retry_count: 3
     # Delay between retries in seconds
     retry_delay_seconds: 1
+    # Filter events by table codes and event types
     table_codes:
       - 9911
       - 9922
@@ -30,8 +31,7 @@ subscribers:
     url: "https://api.example.com/callback"
     enabled: true
     event_types:
-      - "order.*"  # все события заказов
-      - "payment.*"
+      - "OrderStatusChanged"
     headers:
       Authorization: "Bearer token123"
       
