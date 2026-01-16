@@ -11,11 +11,13 @@ import (
 )
 
 type Handler struct {
+	Logger        *slog.Logger
 	NotifyService services.NotifyEventService
 }
 
-func NewHandler(notifySvc services.NotifyEventService) *Handler {
+func NewHandler(logger *slog.Logger, notifySvc services.NotifyEventService) *Handler {
 	return &Handler{
+		Logger:        logger,
 		NotifyService: notifySvc,
 	}
 }
@@ -23,19 +25,21 @@ func NewHandler(notifySvc services.NotifyEventService) *Handler {
 func (h *Handler) HandleEvents(w http.ResponseWriter, r *http.Request) {
 	const op = "transport.HandleEvents"
 
+	logger := h.Logger.With("op", op)
+
 	// Читаем тело запроса от кассовой системы
 	body, err := io.ReadAll(r.Body)
 	if err != nil {
+		logger.Error(op, "Failed to read request body", "error", err)
 		http.Error(w, "Failed to read body", http.StatusInternalServerError)
 		return
 	}
 	defer r.Body.Close()
 
-	//slog.Info("Request Body", "body", string(body))
-
 	var rk7NotifyEvent models.Rk7NotifyEvent
 	err = xml.Unmarshal(body, &rk7NotifyEvent)
 	if err != nil {
+		logger.Error("Failed to parse XML", "error", err)
 		http.Error(w, "Failed to parse XML", http.StatusBadRequest)
 		return
 	}
@@ -45,6 +49,6 @@ func (h *Handler) HandleEvents(w http.ResponseWriter, r *http.Request) {
 
 	// Обработка события по правилам
 	if err := h.NotifyService.HandleNotification(&rk7NotifyEvent); err != nil {
-		slog.Error("Error handling notification", "error", err)
+		logger.Error("Error handling notification", "error", err)
 	}
 }

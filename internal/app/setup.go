@@ -7,7 +7,6 @@ import (
 
 	"github.com/alexandr-andreyev/soup-rk7-events/internal/config"
 	"github.com/alexandr-andreyev/soup-rk7-events/internal/database"
-	"github.com/alexandr-andreyev/soup-rk7-events/internal/logger"
 	"github.com/alexandr-andreyev/soup-rk7-events/internal/services"
 	"github.com/alexandr-andreyev/soup-rk7-events/internal/transport"
 )
@@ -38,7 +37,7 @@ func setup(svcName, sha1ver string) (server, error) {
 			},
 			Subscribers: []config.Subscriber{},
 			Database: config.DatabaseConfig{
-				Path: "orders.db",
+				Path: "events.db",
 			},
 			Logging: config.LoggingConfig{
 				Directory: "logs",
@@ -47,9 +46,10 @@ func setup(svcName, sha1ver string) (server, error) {
 	}
 
 	// Initialize file logging
-	if err := logger.InitFileLogger(cfg.Logging.Directory); err != nil {
-		slog.Warn("Failed to initialize file logging", "error", err)
-		// Continue without file logging
+	s.Logger, err = initFileLogger(cfg.Logging.Directory)
+	if err != nil {
+		slog.Error("Failed to initialize logger", "error", err)
+		return s, err
 	}
 
 	// Initialize database
@@ -67,15 +67,16 @@ func setup(svcName, sha1ver string) (server, error) {
 
 	// Create service with dispatcher and repository
 	handleEventService := services.NewRkNotifyHandleService(
+		s.Logger,
 		dispatcher,
 		orderRepo,
 	)
-	s.httpServer = setupHttpServer(handleEventService, cfg)
+	s.httpServer = setupHttpServer(s.Logger, handleEventService, cfg)
 	return s, nil
 }
 
-func setupHttpServer(handleEventService services.NotifyEventService, cfg *config.Config) *http.Server {
-	handler := transport.NewHandler(handleEventService)
+func setupHttpServer(logger *slog.Logger, handleEventService services.NotifyEventService, cfg *config.Config) *http.Server {
+	handler := transport.NewHandler(logger, handleEventService)
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/events", handler.HandleEvents)

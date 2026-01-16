@@ -3,6 +3,7 @@ package transport
 import (
 	"bytes"
 	"errors"
+	"log/slog"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -32,7 +33,7 @@ func TestHandleEvents_Success(t *testing.T) {
 		},
 	}
 
-	handler := NewHandler(mockService)
+	handler := NewHandler(slog.Default(), mockService)
 
 	xmlBody := `<a RestCode="123" DateTime="2024-01-15T10:30:00" Situation="1" seqnumber="42" guid="test-guid" name="Started" ShiftNum="5" ShiftDate="2024-01-15"></a>`
 	req := httptest.NewRequest(http.MethodPost, "/events", bytes.NewBufferString(xmlBody))
@@ -73,7 +74,7 @@ func TestHandleEvents_WithNestedElements(t *testing.T) {
 		},
 	}
 
-	handler := NewHandler(mockService)
+	handler := NewHandler(slog.Default(), mockService)
 
 	xmlBody := `<a RestCode="456" DateTime="2024-01-15T10:30:00" name="OrderChanged">
 		<Station id="1" code="ST001" name="Station 1" guid="station-guid" NetName="NET1"></Station>
@@ -156,7 +157,7 @@ func TestHandleEvents_WithNestedElements(t *testing.T) {
 func TestHandleEvents_InvalidXML(t *testing.T) {
 	// Arrange
 	mockService := &MockNotifyService{}
-	handler := NewHandler(mockService)
+	handler := NewHandler(slog.Default(), mockService)
 
 	invalidXML := `<invalid>not-closed`
 	req := httptest.NewRequest(http.MethodPost, "/events", bytes.NewBufferString(invalidXML))
@@ -186,7 +187,7 @@ func TestHandleEvents_ServiceError(t *testing.T) {
 		},
 	}
 
-	handler := NewHandler(mockService)
+	handler := NewHandler(slog.Default(), mockService)
 
 	xmlBody := `<a RestCode="123" name="Started"></a>`
 	req := httptest.NewRequest(http.MethodPost, "/events", bytes.NewBufferString(xmlBody))
@@ -211,7 +212,7 @@ func TestHandleEvents_ServiceError(t *testing.T) {
 func TestHandleEvents_EmptyBody(t *testing.T) {
 	// Arrange
 	mockService := &MockNotifyService{}
-	handler := NewHandler(mockService)
+	handler := NewHandler(slog.Default(), mockService)
 
 	req := httptest.NewRequest(http.MethodPost, "/events", bytes.NewBufferString(""))
 	rec := httptest.NewRecorder()
@@ -230,7 +231,7 @@ func TestNewHandler(t *testing.T) {
 	mockService := &MockNotifyService{}
 
 	// Act
-	handler := NewHandler(mockService)
+	handler := NewHandler(slog.Default(), mockService)
 
 	// Assert
 	if handler == nil {

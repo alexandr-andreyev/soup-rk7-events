@@ -13,55 +13,61 @@ type NotifyEventService interface {
 }
 
 type RkNotifyHandleService struct {
+	Logger     *slog.Logger
 	dispatcher *EventDispatcher
 	orderRepo  *database.OrderStateRepository
 }
 
-func NewRkNotifyHandleService(dispatcher *EventDispatcher, orderRepo *database.OrderStateRepository) *RkNotifyHandleService {
+func NewRkNotifyHandleService(logger *slog.Logger, dispatcher *EventDispatcher, orderRepo *database.OrderStateRepository) *RkNotifyHandleService {
 	return &RkNotifyHandleService{
+		Logger:     logger,
 		dispatcher: dispatcher,
 		orderRepo:  orderRepo,
 	}
 }
 
 func (s *RkNotifyHandleService) HandleNotification(data *models.Rk7NotifyEvent) error {
+	const op = "RkNotifyHandleService.HandleNotification"
+
+	logger := s.Logger.With("op", op)
 	// Log received event
-	slog.Info("Received event", "name", data.Name, "guid", data.GUID)
+	logger.Info("Received RK7 Notify Event", "name", data.Name, "guid", data.GUID)
 
 	// check subscribers exist
 
 	// Process event based on type
 	switch data.Name {
 	case "Started":
-		slog.Info("Started event", "restCode", data.RestCode)
+		logger.Info("Ignoring Started event")
 		// Don't forward system events
 		return nil
 
 	case "New Order":
-		slog.Info("New Order event", "data", data)
+		logger.Info("Processing New Order event", "data", data)
 		// Forward to external API
 		// return s.sendToExternalAPI(data)
 
 	case "Order Changed":
 		if data.Order == nil {
-			slog.Info("Ignoring Order Changed event with no Order data")
+			logger.Info("Ignoring Order Changed event with no Order data", "order", data.GUID)
 			return nil
 		}
 		if data.Order.Kdsstate == "" {
-			slog.Info("Ignoring Order Changed event with empty Kdsstate")
+			logger.Info("Ignoring Order Changed event with empty Kdsstate", "order", data.GUID, "status", data.Order.Kdsstate)
 			return nil
 		}
 		return s.handleOrderStatusChange(data)
 
 	case "Print Receipt":
 		if data.Order == nil {
-			slog.Info("Ignoring Print Receipt event with no Order data")
+			logger.Info("Ignoring Print Receipt event with no Order data", "order", data.GUID)
 			return nil
 		}
 		return s.handleOrderStatusChange(data)
 
 	default:
-		slog.Info("Unhandled event", "name", data.Name)
+		logger.Info("Ignoring unhandled event type", "name", data.Name)
+		logger.Debug("Ignoring event data", "data", data)
 		return nil
 	}
 	return nil
@@ -69,6 +75,9 @@ func (s *RkNotifyHandleService) HandleNotification(data *models.Rk7NotifyEvent) 
 
 // handleOrderStatusChange checks if order status changed and sends event if needed
 func (s *RkNotifyHandleService) handleOrderStatusChange(data *models.Rk7NotifyEvent) error {
+	const op = "RkNotifyHandleService.handleOrderStatusChange"
+	slog := s.Logger.With("op", op)
+
 	orderGUID := data.Order.GUID
 	newStatus := data.Order.Kdsstate
 

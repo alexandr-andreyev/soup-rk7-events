@@ -42,7 +42,7 @@ subscribers:
 
 database:
   # SQLite database file path for order state tracking
-  path: "orders.db"
+  path: "events.db"
 
 logging:
   # Directory for log files
