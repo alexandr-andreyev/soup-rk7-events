@@ -21,9 +21,9 @@ func NewHandler(notifySvc services.NotifyEventService) *Handler {
 }
 
 func (h *Handler) HandleEvents(w http.ResponseWriter, r *http.Request) {
-	slog.Info("Received event")
+	const op = "transport.HandleEvents"
 
-	// Читаем тело запроса
+	// Читаем тело запроса от кассовой системы
 	body, err := io.ReadAll(r.Body)
 	if err != nil {
 		http.Error(w, "Failed to read body", http.StatusInternalServerError)
@@ -43,7 +43,7 @@ func (h *Handler) HandleEvents(w http.ResponseWriter, r *http.Request) {
 	// Отправляем OK сразу после успешного парсинга
 	w.WriteHeader(http.StatusOK)
 
-	// Обрабатываем уведомление синхронно для сохранения порядка событий
+	// Обработка события по правилам
 	if err := h.NotifyService.HandleNotification(&rk7NotifyEvent); err != nil {
 		slog.Error("Error handling notification", "error", err)
 	}

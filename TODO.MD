@@ -25,3 +25,75 @@
 Настройки из центра:
 1. При включении пробовать загрузить настройки из бэкенда (если в файле конфигурации есть такая настройка)
 
+
+Основные проблемы
+
+События могут приходить не по порядку (сетевые задержки)
+Внешняя система может быть недоступна (нужны retry)
+Дубликаты событий (at-least-once delivery)
+Сбои в процессе обработки (потеря событий)
+
+Рекомендуемый подход: Outbox Pattern + State Machine
+
+// Состояние отправки для каждого подписчика отдельно
+type SubscriberOrderState struct {
+    SubscriberID   string
+    OrderID        string
+    LastSentStatus Status
+    UpdatedAt      time.Time
+}
+
+// Outbox сообщение привязано к подписчику
+type OutboxMessage struct {
+    ID            int64
+    SubscriberID  string    // ключевое поле!
+    OrderID       string
+    Status        Status
+    Payload       []byte
+    CreatedAt     time.Time
+    ProcessedAt   *time.Time
+    RetryCount    int
+    NextRetryAt   time.Time
+}
+
+// Цепочка статусов (state machine)
+type Status string
+
+const (
+    StatusCreated    Status = "created"
+    StatusConfirmed  Status = "confirmed"
+    StatusPreparing  Status = "preparing"
+    StatusReady      Status = "ready"
+    StatusDelivering Status = "delivering"
+    StatusCompleted  Status = "completed"
+    StatusCancelled  Status = "cancelled"
+)
+
+// Порядок статусов для валидации цепочки
+var statusOrder = map[Status]int{
+    StatusCreated:    1,
+    StatusConfirmed:  2,
+    StatusPreparing:  3,
+    StatusReady:      4,
+    StatusDelivering: 5,
+    StatusCompleted:  6,
+}
+
+// Какие статусы можно пропустить при отправке
+// (например, если заказ уже в "ready", а мы отправили только "created")
+func getStatusChain(from, to Status) []Status {
+    chain := []Status{}
+    fromOrder := statusOrder[from]
+    toOrder := statusOrder[to]
+    
+    for status, order := range statusOrder {
+        if order > fromOrder && order <= toOrder {
+            chain = append(chain, status)
+        }
+    }
+    // сортировка по порядку
+    sort.Slice(chain, func(i, j int) bool {
+        return statusOrder[chain[i]] < statusOrder[chain[j]]
+    })
+    return chain
+}
