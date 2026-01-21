@@ -27,3 +27,4 @@ _testmain.go
 orders.db
 nul
 logs/*
+events.db
