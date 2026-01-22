@@ -76,6 +76,7 @@ func setup(svcName, sha1ver string) (server, error) {
 }
 
 func setupHttpServer(logger *slog.Logger, handleEventService services.NotifyEventService, cfg *config.Config) *http.Server {
+	logger.Info("Setting up HTTP server", "port", cfg.Server.Port)
 	handler := transport.NewHandler(logger, handleEventService)
 
 	mux := http.NewServeMux()

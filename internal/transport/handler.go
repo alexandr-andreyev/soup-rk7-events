@@ -36,6 +36,8 @@ func (h *Handler) HandleEvents(w http.ResponseWriter, r *http.Request) {
 	}
 	defer r.Body.Close()
 
+	logger.Info("events body", "body", string(body))
+
 	var rk7NotifyEvent models.Rk7NotifyEvent
 	err = xml.Unmarshal(body, &rk7NotifyEvent)
 	if err != nil {
