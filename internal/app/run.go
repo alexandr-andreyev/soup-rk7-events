@@ -1,13 +1,27 @@
 package app
 
 import (
+	"fmt"
+
 	"github.com/pkg/errors"
 )
 
-// Run launches the service
-func Run(svcName, sha1ver string) error {
+// BuildInfo contains version information
+type BuildInfo struct {
+	Version   string
+	Commit    string
+	BuildTime string
+}
 
-	s, err := setup(svcName, sha1ver)
+// String returns formatted version string
+func (b BuildInfo) String() string {
+	return fmt.Sprintf("%s (commit: %s, built: %s)", b.Version, b.Commit, b.BuildTime)
+}
+
+// Run launches the service
+func Run(svcName string, build BuildInfo) error {
+
+	s, err := setup(svcName, build)
 	if err != nil {
 		return errors.Wrap(err, "setup")
 	}

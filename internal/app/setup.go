@@ -12,17 +12,10 @@ import (
 )
 
 // if setup returns an error, the service doesn't start
-func setup(svcName, sha1ver string) (server, error) {
+func setup(svcName string, build BuildInfo) (server, error) {
 	var s server
 
-	// did we get a full SHA1?
-	if len(sha1ver) == 40 {
-		sha1ver = sha1ver[0:7]
-	}
-
-	if sha1ver == "" {
-		sha1ver = "dev"
-	}
+	slog.Info("Starting service", "version", build.Version, "commit", build.Commit, "buildTime", build.BuildTime)
 
 	// Load configuration
 	cfg, err := config.Load("config.yaml")

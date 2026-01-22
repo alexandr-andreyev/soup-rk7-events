@@ -18,12 +18,21 @@ const svcName = "soup-rk7-events" //TODO Имя службы брать из н�
 // This is the name that will appear in the Services control panel
 const svcNameLong = "Soup Events for R_Keeper7" //TODO Имя службы брать из настроек
 
-// This is assigned the full SHA1 hash from GIT
-var sha1ver string
+// Build-time variables (set via ldflags)
+var (
+	version   = "0.0.0"
+	commit    = "unknown"
+	buildTime = "unknown"
+)
 
 func svcLauncher() error {
+	build := app.BuildInfo{
+		Version:   version,
+		Commit:    commit,
+		BuildTime: buildTime,
+	}
 
-	err := app.Run(svcName, sha1ver)
+	err := app.Run(svcName, build)
 	if err != nil {
 		return errors.Wrap(err, "app.run")
 	}

@@ -1,6 +1,7 @@
 package app
 
 import (
+	"context"
 	"io"
 	"log/slog"
 	"os"
@@ -30,6 +31,47 @@ func (c *crlfWriter) Write(p []byte) (n int, err error) {
 	return len(p), nil
 }
 
+// multiHandler writes to multiple slog handlers
+type multiHandler struct {
+	handlers []slog.Handler
+}
+
+func (h *multiHandler) Enabled(ctx context.Context, level slog.Level) bool {
+	for _, handler := range h.handlers {
+		if handler.Enabled(ctx, level) {
+			return true
+		}
+	}
+	return false
+}
+
+func (h *multiHandler) Handle(ctx context.Context, r slog.Record) error {
+	for _, handler := range h.handlers {
+		if handler.Enabled(ctx, r.Level) {
+			if err := handler.Handle(ctx, r); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func (h *multiHandler) WithAttrs(attrs []slog.Attr) slog.Handler {
+	handlers := make([]slog.Handler, len(h.handlers))
+	for i, handler := range h.handlers {
+		handlers[i] = handler.WithAttrs(attrs)
+	}
+	return &multiHandler{handlers: handlers}
+}
+
+func (h *multiHandler) WithGroup(name string) slog.Handler {
+	handlers := make([]slog.Handler, len(h.handlers))
+	for i, handler := range h.handlers {
+		handlers[i] = handler.WithGroup(name)
+	}
+	return &multiHandler{handlers: handlers}
+}
+
 func initFileLogger(logDir string) (*slog.Logger, error) {
 	// Create log directory if it doesn't exist
 	if err := os.MkdirAll(logDir, 0755); err != nil {
@@ -45,10 +87,15 @@ func initFileLogger(logDir string) (*slog.Logger, error) {
 		return nil, err
 	}
 
-	// Wrap file with CRLF writer
-	writer := &crlfWriter{w: file}
+	opts := &slog.HandlerOptions{Level: slog.LevelInfo}
 
-	logger := slog.New(slog.NewTextHandler(writer, &slog.HandlerOptions{Level: slog.LevelInfo}))
+	// File handler with CRLF line endings
+	fileHandler := slog.NewTextHandler(&crlfWriter{w: file}, opts)
+
+	// Console handler without CRLF conversion
+	consoleHandler := slog.NewTextHandler(os.Stdout, opts)
+
+	logger := slog.New(&multiHandler{handlers: []slog.Handler{fileHandler, consoleHandler}})
 
 	return logger, nil
 }

@@ -28,9 +28,15 @@ func usage(errmsg string) {
 		"%s\n\n"+
 			"usage: %s <command>\n"+
 			"       where <command> is one of\n"+
-			"       install, remove, debug, start, stop, pause or continue.\n",
+			"       install, remove, debug, start, stop, pause, continue or version.\n",
 		errmsg, os.Args[0])
 	os.Exit(2)
+}
+
+func printVersion() {
+	fmt.Printf("%s v%s\n", svcNameLong, version)
+	fmt.Printf("Commit:     %s\n", commit)
+	fmt.Printf("Build time: %s\n", buildTime)
 }
 
 func main() {
@@ -56,6 +62,9 @@ func main() {
 
 	cmd := strings.ToLower(os.Args[1])
 	switch cmd {
+	case "version", "-v", "--version":
+		printVersion()
+		return
 	case "debug":
 		runService(svcName, true)
 		return
