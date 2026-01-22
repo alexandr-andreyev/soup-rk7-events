@@ -7,7 +7,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/alexandr-andreyev/soup-rk7-events/internal/client"
+	"github.com/alexandr-andreyev/soup-rk7-events/internal/client/subscriber"
 	"github.com/alexandr-andreyev/soup-rk7-events/internal/config"
 	"github.com/alexandr-andreyev/soup-rk7-events/internal/models"
 )
@@ -18,7 +18,7 @@ type EventDispatcher struct {
 }
 
 type subscriberWithFilters struct {
-	client     *client.SubscriberClient
+	client     *subscriber.SubscriberClient
 	config     *config.Subscriber
 	eventTypes []string
 	tableCodes map[int]bool
@@ -50,7 +50,7 @@ func NewEventDispatcher(cfg *config.Config) *EventDispatcher {
 		}
 
 		subscribers = append(subscribers, &subscriberWithFilters{
-			client:     client.NewSubscriberClient(sub),
+			client:     subscriber.NewSubscriberClient(sub),
 			config:     sub,
 			eventTypes: normalizedEventTypes,
 			tableCodes: tableCodes,
